@@ -8,12 +8,12 @@ import 'firebase/compat/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAeJN3GEnO1Rmy6KAcRuQuKtSJITyoSdrM",
-  authDomain: "loginui-7261b.firebaseapp.com",
-  projectId: "loginui-7261b",
-  storageBucket: "loginui-7261b.appspot.com",
-  messagingSenderId: "945249990048",
-  appId: "1:945249990048:web:78d09df16b38f8a8f260c5"
+  apiKey: "AIzaSyCkbvB7fczgewtQBlMN1YtEz6MX26pignU",
+  authDomain: "cz2006-login.firebaseapp.com",
+  projectId: "cz2006-login",
+  storageBucket: "cz2006-login.appspot.com",
+  messagingSenderId: "310509353216",
+  appId: "1:310509353216:web:ca5ea1fa76c70e9769dbe5"
 };
 
 // Initialize Firebase
