@@ -11,7 +11,7 @@ import {
 
 export default function ResetPassword (){
     const [Email, setEmail] = useState('')
-    
+
 	let [fontsLoaded] = useFonts({
 		'Comfortaa': Comfortaa_400Regular,
 		'Roboto': Roboto_400Regular,
@@ -69,7 +69,7 @@ const stylesheet = StyleSheet.create({
 	_Login_Page: {
 		position: "relative",
 		width: Dimensions.get("window").width,
-		height: 640,
+		height: Dimensions.get("window").height,
 		borderRadius: 0,
 		overflow: "hidden",
 		transform: [

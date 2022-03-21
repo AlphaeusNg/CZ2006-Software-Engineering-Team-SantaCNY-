@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableNativeFeedbackComponent, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { TouchableNativeFeedback } from 'react-native-web';
 import { auth } from '../Firebase';
 
@@ -13,7 +13,7 @@ const LoginScreen = () =>{
     useEffect(()=>{
         const unsubscribe = auth.onAuthStateChanged(user=>{
             if(user){
-                navigation.replace("MainMenu")
+                navigation.replace("Main Menu")
             }
         })
 
@@ -42,6 +42,10 @@ const handleLogin = () => {
 
 const resetPwHandler = () =>{
         navigation.navigate("Reset Password");
+}
+
+const registrationHandler = () =>{
+        navigation.navigate("Registration");
 }
 
     return(
@@ -79,7 +83,7 @@ const resetPwHandler = () =>{
                         <Text style ={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={handleSignUp}
+                    onPress={registrationHandler}
                     style = {[styles.button,styles.buttonOutline]}
                     >
                         <Text style ={styles.buttonOutlineText}>Register</Text>
