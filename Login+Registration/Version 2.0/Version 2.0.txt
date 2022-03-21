@@ -1,6 +1,6 @@
 Version 2.0
 
 Yet to finish:
-1. Main Menu display errors
-2. Authenticate email when forget password
-3. Verification for registration + forget password
+1. Authenticate email when forget password
+2. SMS Verification for registration + forget password
+3. Settings
