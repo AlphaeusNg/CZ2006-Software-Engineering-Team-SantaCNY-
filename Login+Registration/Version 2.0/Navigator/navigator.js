@@ -7,6 +7,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import MainMenu from '../Screens/MainMenu';
 import ResetPassword from '../Screens/ResetPassword';
 import RegistrationScreen from '../Screens/RegistrationScreen';
+import MedicalInfo from '../Screens/MedicalInfo';
 
 const {Navigator,Screen} = createNativeStackNavigator();
 
