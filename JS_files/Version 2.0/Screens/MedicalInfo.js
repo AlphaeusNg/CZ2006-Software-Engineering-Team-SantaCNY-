@@ -1,5 +1,5 @@
-/** External changes to make:
- * change in your manifest file: (android:windowSoftInputMode="adjustPan") for keyboardavoidingview to work*/
+// External changes to make:
+// change in your manifest file: (android:windowSoftInputMode="adjustPan") for keyboardavoidingview to work
 
 import React from 'react';
 //import { NavigationContainer } from '@react-navigation/native';
@@ -38,7 +38,7 @@ const COLOR_CONST = 'aliceblue';
 
 /**
  * Default function for MedicalInfo Screen
- * @return {MedicalInfoUI} The User Interface screen to be displayed
+ * @return {component} The Medical Info User Interface screen to be displayed
  */
 export default function MedicalInfoUI() {
 
