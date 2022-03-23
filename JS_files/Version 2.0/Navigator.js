@@ -8,9 +8,9 @@ import MainMenu from './Screens/MainMenu';
 import ResetPassword from './Screens/ResetPassword';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
-import MedicalInfoUI from './Screens/MedicalInfo';
-import GuideInfoUI from './Screens/GuideInfo';
-import EmergencyButtonScreen from './Screens/EmergencyButton';
+import MedicalInfoUI from './Screens/MedicalInfoScreen';
+import GuideInfoUI from './Screens/GuideInfoScreen';
+import EmergencyButtonScreen from './Screens/EmergencyButtonScreen';
 import MyLocationMapMarker from './Screens/CheckAEDScreen';
 
 
