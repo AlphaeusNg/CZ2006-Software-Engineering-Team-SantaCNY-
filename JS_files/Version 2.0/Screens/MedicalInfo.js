@@ -38,6 +38,7 @@ const COLOR_CONST = 'aliceblue';
 
 /**
  * Default function for generating MedicalInfo Screen
+ * @module
  * @return {component} The Medical Info User Interface screen to be displayed
  */
 
