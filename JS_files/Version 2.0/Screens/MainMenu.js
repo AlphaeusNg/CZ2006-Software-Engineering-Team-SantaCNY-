@@ -1,31 +1,40 @@
 import React from "react";
 import { View, Text, Image, ScrollView, StyleSheet, Dimensions, TouchableNativeFeedback } from "react-native";
-import { Svg, Path } from "react-native-svg";
-import AppLoading from 'expo-app-loading';
-import { useNavigation } from '@react-navigation/native';
 
+
+import { useNavigation } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
 import {
-useFonts, 
-Comfortaa_400Regular,
-SourceSansPro_400Regular
-} from "@expo-google-fonts/dev";
+	useFonts, 
+	Comfortaa_400Regular,
+	SourceSansPro_400Regular
+	} from "@expo-google-fonts/dev";
+
 
 const MainMenu = () => {
 
     // NAVIGATION STUFF
     const navigation = useNavigation()
     const MedicalInfoNavigation = () =>{
-        navigation.navigate("Home");
+        navigation.navigate("Medical Info");
     }
     const ProfileNavigation = () =>{
         navigation.navigate("Home");
     }
     const GuideNavigation = () =>{
-        navigation.navigate("Home");
+        navigation.navigate("Guide Info");
     }
     const AEDNavigation = () =>{
         navigation.navigate("Home");
     }
+
+	const ebuttonNavigation  = () => {
+		navigation.navigate("Emergency Button");
+	}
+
+	const profileNavigation = () =>{
+		navigation.navigate("Home");
+	}
 
     // FONTS
 	let [fontsLoaded] = useFonts({
@@ -53,38 +62,47 @@ const MainMenu = () => {
                 </View>
             </TouchableNativeFeedback>
             {/* Second + Third Box - Profile + Guides */}
-			<View style = {stylesheet.Profile_Container}>
-				<View style = {stylesheet.Profile_Box}>
-                    <Image style = {stylesheet.Profile_Icon} source = {{uri: Profile_image_URL}}>
-					</Image>
-					<View style = {[stylesheet.Profile_Text]}>
-					<Text style = {[stylesheet.Profile_Text]}>
-						Profile
-					</Text>
+			<TouchableNativeFeedback onPress = {ProfileNavigation}>
+				<View style = {stylesheet.Profile_Container}>
+					<View style = {stylesheet.Profile_Box}>
+						<Image style = {stylesheet.Profile_Icon} source = {{uri: Profile_image_URL}}>
+						</Image>
+						<View style = {[stylesheet.Profile_Text]}>
+						<Text style = {[stylesheet.Profile_Text]}>
+							Profile
+						</Text>
+						</View>
 					</View>
-				</View>
-				<View style = {stylesheet.Guide_Box}>
-                    <Image style = {stylesheet.Guide_Icon} source = {{uri: Guide_image_URL}}>
-					</Image>
-					<View style = {[stylesheet.Guide_Text]}>
-					<Text style = {[stylesheet.Guide_Text]}>
-						Guides/Advisories
-					</Text>
+			
+			<TouchableNativeFeedback onPress = {GuideNavigation}>
+			
+					<View style = {stylesheet.Guide_Box}>
+						<Image style = {stylesheet.Guide_Icon} source = {{uri: Guide_image_URL}}>
+						</Image>
+						<View style = {[stylesheet.Guide_Text]}>
+						<Text style = {[stylesheet.Guide_Text]}>
+							Guides/Advisories
+						</Text>
+						</View>
 					</View>
-				</View>
+				
+			</TouchableNativeFeedback>
 			</View>
+			</TouchableNativeFeedback>
             {/* Emergency Response */}
-			<View style = {stylesheet.Emergency_Container}>
-				<View style = {stylesheet.Emergency_Box}>
-                    <Image style = {stylesheet.Emergency_Icon} source = {{uri: Emergency_image_URL}}>
-					</Image>
-					<View style = {[stylesheet.Emergency_Text]}>
-					<Text style = {[stylesheet.Emergency_Text]}>
-						Emergency Response
-					</Text>
+			<TouchableNativeFeedback onPress={ebuttonNavigation}>
+				<View style = {stylesheet.Emergency_Container}>
+					<View style = {stylesheet.Emergency_Box}>
+						<Image style = {stylesheet.Emergency_Icon} source = {{uri: Emergency_image_URL}}>
+						</Image>
+						<View style = {[stylesheet.Emergency_Text]}>
+						<Text style = {[stylesheet.Emergency_Text]}>
+							Emergency Response
+						</Text>
+						</View>
 					</View>
 				</View>
-			</View>
+			</TouchableNativeFeedback>
             {/* Bottom Row - Settings + AED */}
 			<View style = {stylesheet.Settings_AED_Container}>
 				<View style = {stylesheet.Settings_Box}>
@@ -185,7 +203,7 @@ const stylesheet = StyleSheet.create({
 	},
 	Profile_Container: {
 		position: "relative",
-		width: 315,
+		width: 310,
 		height: 120,
 		borderRadius: 0,
         marginTop: 30,
@@ -236,6 +254,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginTop: 36
 	},
+	
 	Guide_Box: {
 		position: "relative",
 		width: "auto",
@@ -416,7 +435,7 @@ const stylesheet = StyleSheet.create({
 		fontWeight: "bold",
 		textDecorationLine: "none",
 		lineHeight: 40,
-		fontSize: 30,
+		fontSize: 20,
 		color: "rgba(9, 16, 29, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
