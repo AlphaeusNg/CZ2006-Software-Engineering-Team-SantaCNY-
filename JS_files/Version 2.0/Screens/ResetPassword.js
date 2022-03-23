@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput, Image, ScrollView, StyleSheet, Dimensions } from "react-native";
-import { Svg, Path } from "react-native-svg";
+
 import AppLoading from 'expo-app-loading';
 
 import {
@@ -9,7 +9,13 @@ import {
 	Roboto_400Regular
 } from "@expo-google-fonts/dev";
 
+/**
+ * Default function for generating ResetPassword Screen
+ * @module
+ * @return {component} The ResetPassword User Interface screen to be displayed
+ */
 export default function ResetPassword (){
+	// Declare a new state variable, for setting Email
     const [Email, setEmail] = useState('')
 
 	let [fontsLoaded] = useFonts({
@@ -18,7 +24,7 @@ export default function ResetPassword (){
 	});
 
     if (!fontsLoaded) {
-        return <AppLoading />;
+        return <AppLoading/>;
       } else {
 	return (
 		<ScrollView bounces={false} showsVerticalScrollIndicator={false} style={{height: Dimensions.get("window").height}}>
@@ -66,6 +72,7 @@ or email address
 }
 
 const stylesheet = StyleSheet.create({
+	//_Login_Page(Styling for loginpage)
 	_Login_Page: {
 		position: "relative",
 		width: Dimensions.get("window").width,
@@ -81,6 +88,7 @@ const stylesheet = StyleSheet.create({
 		left: 0,
 		top: 0,
 	},
+	//_Register style(Styling of register)
 	_Register: {
 		position: "absolute",
 		width: '100%',
@@ -97,10 +105,11 @@ const stylesheet = StyleSheet.create({
 		],
 		backgroundColor: "rgba(255, 255, 255, 0)",
 	},
+	//_Reset_Password(Styling for reset password)
 	_Reset_Password: {
 		position: "absolute",
 		width: "80%",
-		height: "100%",
+		height: "150%",
 		left: 0,
 		right: "auto",
 		fontFamily: "Comfortaa",
@@ -112,6 +121,7 @@ const stylesheet = StyleSheet.create({
 		textAlignVertical: "center",
 		letterSpacing: 0.1,
 	},
+	//Component style(Styling for Component)
 	_Component: {
 		position: "absolute",
 		width: "auto",
@@ -128,6 +138,7 @@ const stylesheet = StyleSheet.create({
 		],
 		backgroundColor: "rgba(255, 255, 255, 0)",
 	},
+	//_Enter_your_registered_phone_number_or_email_address style(Styling for entering phonenumber/Email)
 	_Enter_your_registered_phone_number_or_email_address: {
 		position: "absolute",
 		width: "auto",
@@ -149,6 +160,7 @@ const stylesheet = StyleSheet.create({
 		textAlignVertical: "center",
 		letterSpacing: 0.1,
 	},
+	//Component_2 style (styling for phone/email output)
 	_Component_2: {
 		position: "absolute",
 		width: "auto",
@@ -165,6 +177,7 @@ const stylesheet = StyleSheet.create({
 		],
 		backgroundColor: "rgba(255, 255, 255, 0)",
 	},
+	//_Rectangle_2 style (Box for phone/email output)
 	_Rectangle_2: {
 		position: "absolute",
 		width: 328,
@@ -182,6 +195,7 @@ const stylesheet = StyleSheet.create({
 		],
 		backgroundColor: "rgba(255, 255, 255, 1)",
 	},
+	//_Phone_Number style (Text output for phone number/email)
 	_Phone_Number: {
 		position: "absolute",
 		width: "auto",
@@ -203,6 +217,7 @@ const stylesheet = StyleSheet.create({
 		textAlignVertical: "center",
 		letterSpacing: 0.1,
 	},
+	//_Button style (Styling for next button)
 	_Button: {
 		position: "absolute",
 		width: "auto",
@@ -219,6 +234,7 @@ const stylesheet = StyleSheet.create({
 		],
 		backgroundColor: "rgba(0,0,0,0)",
 	},
+	//_Rectangle_2_2 style (Styling for next button)
 	_Rectangle_2_2: {
 		position: "absolute",
 		width: 328,
@@ -236,6 +252,7 @@ const stylesheet = StyleSheet.create({
 		],
 		backgroundColor: "rgba(0, 0, 0, 1)",
 	},
+	//_next style (Text Output for next button)
 	_next: {
 		position: "absolute",
 		width: "auto",
@@ -256,6 +273,7 @@ const stylesheet = StyleSheet.create({
 		textAlignVertical: "center",
 		letterSpacing: 0.1,
 	},
+	//_Auto_Layout_Horizontal style (Setting layout)
 	_Auto_Layout_Horizontal: {
 		position: "absolute",
 		width: 36,
@@ -295,6 +313,7 @@ const stylesheet = StyleSheet.create({
 	},
 	_Frame: {
 	},
+	//_Rectangle (Styling for rectangle (not really used))
 	_Rectangle: {
 		position: "absolute",
 		width: 20.370370864868164,

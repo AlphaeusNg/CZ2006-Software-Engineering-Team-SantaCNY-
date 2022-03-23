@@ -3,8 +3,16 @@ import React, { useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableNativeFeedbackComponent, View } from 'react-native';
 import { auth } from '../Firebase';
 
+/**
+ * Default function for generating Registration Screen
+ * @module
+ * @return {component} The Registration User Interface screen to be displayed
+ */
+
+
 const RegistrationScreen = () => {
 
+    //declar useState constants
     const [Email, setEmail] = useState('')
     const [password , setPassword] = useState('')
     const [confirmPassword , setConfirmPassword] = useState('')
@@ -13,19 +21,14 @@ const RegistrationScreen = () => {
     let errorFlag1 = false;
     let errorFlag2 = false;
 
+    //Declare constant functions to use for navigation
     const navigation = useNavigation()
 
-    // const validationSchema = Yup.object().shape({
-    //     password: Yup.string()
-    //         .required('Password is required')
-    //         .min(6, 'Password must be at least 6 characters'),
-    //     confirmPassword: Yup.string()
-    //         .required('Confirm Password is required')
-    //         .oneOf([Yup.ref('password')], 'Passwords must match')
-            
-    // });
-    // const formOptions = { resolver: yupResolver(validationSchema) };
-
+    const MainMenuNavigation = () => {
+        navigation.replace("Main Menu");
+    }
+    
+    //Declare constant function that handles signUp process
     const handleSignUp = () =>{
         errorFlag1 = false;
         errorFlag2 = false;
@@ -43,7 +46,7 @@ const RegistrationScreen = () => {
             if (confirmPassword.length == 0) {
                 errorFlag2 = true;
                 setConfirmPasswordErrorMessage("Confirm Password is required field");
-            } else if (password.length !==  confirmPassword) {
+            } else if (password !==  confirmPassword) {
                 errorFlag2 = true;
                 setConfirmPasswordErrorMessage("Password and confirm password should be same.");
             }
@@ -58,11 +61,14 @@ const RegistrationScreen = () => {
                 const user = UserCredentials.user;
                 console.log('Registered with:',user.Email);
             })
-            .catch(error => alert(error.message))
+            .catch(error => alert(error.message));
+            MainMenuNavigation;
         }
     }
 
     return (
+        
+    // KeyboardAvoidingView to prevent input boxes from being blocked when keyboard comes up
         <KeyboardAvoidingView
           style = {styles.pageContainer}
           behavior = "padding">
@@ -105,6 +111,7 @@ const RegistrationScreen = () => {
                 <TouchableOpacity
                     style = {[styles.button]}
                     onPress = {handleSignUp}
+    
                     >
                         <Text style ={styles.buttonText}>
                             Register
@@ -118,10 +125,12 @@ const RegistrationScreen = () => {
 export default RegistrationScreen;
 
 const styles = StyleSheet.create({
+      // General Container for the page
     pageContainer :{
         flex: 1,
         alignItems:'center'
     },
+    //title style
     title:{
         position: 'relative',
         width: '80%',
@@ -131,16 +140,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 60,
     },
+    //titleText style   (Output for Register for a new account)
     titleText:{
         color: 'black',
         fontWeight: 'bold',
         fontSize: 40,
         textAlign: 'justify'
     },
+    //inputContainer style (Container for the input)
     inputContainer: {
         width:'70%',
         marginTop: 40
     },
+    //input style(Text input for general input)
     input:{
         backgroundColor:'white',
         paddingHorizontal:15,
@@ -148,12 +160,14 @@ const styles = StyleSheet.create({
         borderRadius:10,
         marginTop:10,
     },
+    //buttonContainer style (Container for register button)
     buttonContainer:{
         width:'60%',
         justifyContent:'center',
         alignItems:'center',
         marginTop: 40,
     },
+    //button style (Style for register button)
     button:{
         backgroundColor:'grey',
         width:'100%',
@@ -161,6 +175,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         alignItems:'center',
     },
+    //buttontext style(Text style for register button)
     buttonText:{
         color:'white',
         fontWeight:'700',

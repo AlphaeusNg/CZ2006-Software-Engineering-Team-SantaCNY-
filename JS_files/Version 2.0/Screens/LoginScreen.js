@@ -4,11 +4,17 @@ import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { TouchableNativeFeedback } from 'react-native-web';
 import { auth } from '../Firebase';
-
+/**
+ * Default function for generating Login Screen
+ * @module
+ * @return {component} The Login User Interface screen to be displayed
+ */
 const LoginScreen = () =>{
+     // Declare a new state variable, for setting Email
     const [Email, setEmail] = useState('')
+    // Declare a new state variable, for setting Password
     const [password , setPassword] = useState('')
-
+    //Declare const function used for navigation when authentication succeeds
     const navigation = useNavigation()
     useEffect(()=>{
         const unsubscribe = auth.onAuthStateChanged(user=>{
@@ -19,7 +25,7 @@ const LoginScreen = () =>{
 
         return unsubscribe
     },[])
-
+    //Declare const function that handles SignUp process(Not exactly used here)
     const handleSignUp = () =>{
         auth
         .createUserWithEmailAndPassword(Email,password)
@@ -29,7 +35,7 @@ const LoginScreen = () =>{
         })
         .catch(error => alert(error.message))
     }
-
+//Declare const function that handles the login process
 const handleLogin = () => {
     auth
     .signInWithEmailAndPassword(Email,password)
@@ -39,11 +45,11 @@ const handleLogin = () => {
     })
     .catch(error => alert(error.message))
 }
-
+//Declare navigation function to resetPassword screen
 const resetPwHandler = () =>{
         navigation.navigate("Reset Password");
 }
-
+//Declare navigation function to registration screen
 const registrationHandler = () =>{
         navigation.navigate("Registration");
 }
@@ -103,14 +109,17 @@ const registrationHandler = () =>{
 export default LoginScreen
 
 const styles = StyleSheet.create({
+    //General Container for the Login Screen
     container :{
         flex: 1,
         justifyContent :'center',
         alignItems:'center'
     },
+    //inputContainer style (Container for input)
     inputContainer: {
         width:'70%'
     },
+    //title style (Styling for title box)
     title:{
         width: '80%',
         height: 60,
@@ -119,16 +128,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 60
     },
+    //titleText style (Text output for title)
     titleText:{
         color: 'black',
         fontWeight: 'bold',
         fontSize: 40,
     },
+    //plainText style (Text output for resetPW button)
     plainText:{
         color: 'blue',
         fontSize: 14,
         marginTop: 5
     },
+    //input style (Styling for input)
     input:{
         backgroundColor:'white',
         paddingHorizontal:15,
@@ -136,12 +148,14 @@ const styles = StyleSheet.create({
         borderRadius:10,
         marginTop:5,
     },
+    //buttonContainer(Container for login button)
     buttonContainer:{
         width:'60%',
         justifyContent:'center',
         alignItems:'center',
         marginTop: 40,
     },
+    //button style (styling for the button)
     button:{
         backgroundColor:'grey',
         width:'100%',
@@ -149,19 +163,22 @@ const styles = StyleSheet.create({
         borderRadius:10,
         alignItems:'center',
     },
+    //buttonOutline style ( styling for the registration button)
     buttonOutline:{
         backgroundColor:'white',
         marginTop:5,
         borderColor : 'grey',
         borderWidth:2,
     },
+    //buttonText style (Text output for  login button)
     buttonText:{
         color:'white',
         fontWeight:'700',
         fontSize:16,
     },
+    //buttonOutlineText(Text output for registraion button)
     buttonOutlineText:{
         color:'grey',
         fontWeight:'700',
     }
-})
+})  

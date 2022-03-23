@@ -10,28 +10,36 @@ import {
 	SourceSansPro_400Regular
 	} from "@expo-google-fonts/dev";
 
-
+/**
+ * Default function for generating MainMenu Screen
+ * @module
+ * @return {component} The MainMenu User Interface screen to be displayed
+ */
 const MainMenu = () => {
 
-    // NAVIGATION STUFF
+  //declare constant function for navigation
     const navigation = useNavigation()
+	//declare constant function for Medical Info navigation
     const MedicalInfoNavigation = () =>{
         navigation.navigate("Medical Info");
     }
+	//declare constant function for Profile navigation
     const ProfileNavigation = () =>{
         navigation.navigate("Home");
     }
+	//declare constant function for GuideInfo navigation
     const GuideNavigation = () =>{
         navigation.navigate("Guide Info");
     }
+	//declare constant function for AED navigation
     const AEDNavigation = () =>{
         navigation.navigate("Home");
     }
-
+	//declare constant function for emergency button navigation
 	const ebuttonNavigation  = () => {
 		navigation.navigate("Emergency Button");
 	}
-
+	//declare constant function for profile navigation
 	const profileNavigation = () =>{
 		navigation.navigate("Home");
 	}
@@ -132,8 +140,9 @@ const MainMenu = () => {
 
 
 export default MainMenu
-
+// Store different const styles for creation of different items
 const stylesheet = StyleSheet.create({
+	// General style for main menu page
 	Main_Menu_Page: {
 		position: "relative",
 		width: Dimensions.get("window").width,
@@ -149,6 +158,7 @@ const stylesheet = StyleSheet.create({
 		left: 0,
 		top: 0,
 	},
+	// Medical_Info_Container style( container for medical info)
 	Medical_Info_Container: {
 		position: "relative",
 		width: 315,
@@ -159,6 +169,7 @@ const stylesheet = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row"
 	},
+	// Medical_Info_Box style (styling for medical info)
 	Medical_Info_Box: {
 		position: "relative",
 		width: "auto",
@@ -176,6 +187,7 @@ const stylesheet = StyleSheet.create({
 		alignItems: 'flex-start',
 		flexShrink: 0,
 	},
+	//Medical_Info_Icon style (styling for medical info icon)
 	Medical_Info_Icon: {
 		position: "absolute",
 		width: 59,
@@ -185,6 +197,7 @@ const stylesheet = StyleSheet.create({
         marginTop : 12,
 		backgroundColor: "rgba(41, 114, 254, 0.10000000149011612)"
 	},
+	//Medical_Info_Text style(Text output for Medical Info)
 	Medical_Info_Text: {
 		position: "absolute",
 		width: "100%",
@@ -201,6 +214,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginTop: 36
 	},
+	//Profile_Container style (Container for profile)
 	Profile_Container: {
 		position: "relative",
 		width: 310,
@@ -211,6 +225,7 @@ const stylesheet = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row"
 	},
+	//Profile_Box style (Styling for profile box)
 	Profile_Box: {
 		position: "relative",
 		width: "auto",
@@ -229,6 +244,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginRight:12
 	},
+	//Profile_Icon style (styling for Profile icon)
 	Profile_Icon: {
 		position: "absolute",
 		width: 59,
@@ -238,6 +254,7 @@ const stylesheet = StyleSheet.create({
         marginTop : 12,
 		backgroundColor: "rgba(41, 114, 254, 0.10000000149011612)"
 	},
+	//Profile_Text style( Text output for profile)
 	Profile_Text: {
 		position: "absolute",
 		width: "100%",
@@ -254,7 +271,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginTop: 36
 	},
-	
+	//Guide_Box style (Styling for Guide Box)
 	Guide_Box: {
 		position: "relative",
 		width: "auto",
@@ -272,6 +289,7 @@ const stylesheet = StyleSheet.create({
 		alignItems: 'flex-start',
 		flexShrink: 0,
 	},
+	//Guide_Icon style (Styling for Guide Icon)
 	Guide_Icon: {
 		position: "absolute",
 		width: 59,
@@ -281,6 +299,7 @@ const stylesheet = StyleSheet.create({
         marginTop : 12,
 		backgroundColor: "rgba(41, 114, 254, 0.10000000149011612)"
 	},
+	//Guide_Text style ( Text output for Guide)
 	Guide_Text: {
 		position: "absolute",
 		width: "100%",
@@ -297,6 +316,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginTop: 36
 	},
+	//Settings_AED_Container(Container for settings/AED)
 	Settings_AED_Container: {
 		position: "relative",
 		width: 315,
@@ -307,6 +327,7 @@ const stylesheet = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row"
 	},
+	//Settings_Box(For box creating for Setting)
 	Settings_Box: {
 		position: "relative",
 		width: "auto",
@@ -325,6 +346,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginRight:12
 	},
+	//Settings_Icon style ( Styling for Settings Icon)
     Settings_Icon: {
 		position: "absolute",
 		width: 59,
@@ -332,6 +354,7 @@ const stylesheet = StyleSheet.create({
 		minWidth: 0,
         marginTop : 12,
 	},
+	//Settings_Text(Text output for settings)
 	Settings_Text: {
 		position: "absolute",
 		width: "100%",
@@ -348,6 +371,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginTop: 36
 	},
+	//AED_Box style (For box created for AED)
 	AED_Box: {
 		position: "relative",
 		width: "auto",
@@ -365,6 +389,7 @@ const stylesheet = StyleSheet.create({
 		alignItems: 'flex-start',
 		flexShrink: 0,
 	},
+	//AED_Icon style ( Styling for AED Icon)
 	AED_Icon: {
 		position: "absolute",
 		width: 59,
@@ -374,6 +399,7 @@ const stylesheet = StyleSheet.create({
         marginTop : 12,
 		backgroundColor: "rgba(41, 114, 254, 0.10000000149011612)"
 	},
+	//AED_Text style (Text Output for AED)
 	AED_Text: {
 		position: "absolute",
 		width: "100%",
@@ -390,6 +416,7 @@ const stylesheet = StyleSheet.create({
 		flexShrink: 0,
         marginTop: 36
 	},
+	//Emergency_Container ( Container for Emergency)
     Emergency_Container: {
 		position: "relative",
 		width: 315,
@@ -400,6 +427,7 @@ const stylesheet = StyleSheet.create({
 		display: "flex",
 		flexDirection: "row"
 	},
+	//Emergency_Box style( For Box created for Emergency)
     Emergency_Box: {
 		position: "relative",
 		width: "auto",
@@ -417,6 +445,7 @@ const stylesheet = StyleSheet.create({
 		alignItems: 'flex-start',
 		flexShrink: 0,
 	},
+	//Emergency_Icon style (Styling For Emergency Icon)
 	Emergency_Icon: {
 		position: "absolute",
 		width: 59,
@@ -426,6 +455,7 @@ const stylesheet = StyleSheet.create({
         marginTop : 20,
 		backgroundColor: "rrgba(245, 73, 73, 1)"
 	},
+	//Emergency_Text style (Text output for Emergency Button)
 	Emergency_Text: {
 		position: "absolute",
 		width: "100%",
@@ -443,6 +473,7 @@ const stylesheet = StyleSheet.create({
         marginTop: 48
 	}
 });
+//Images used for button Icons
 
 const medicalinfo_image_URL = "https://compai.pub/v1/png/b16094a5989eab98e2fb6144ba240048a5d4879d118230cc0395932ce74ddefb"
 const AED_image_URL = "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/b3d4123a4ed9c5cb7937bc2ed489e313"
