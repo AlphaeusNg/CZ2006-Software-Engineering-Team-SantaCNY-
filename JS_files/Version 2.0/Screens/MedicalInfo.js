@@ -37,20 +37,20 @@ const DIFFERENCE_CONST = 40;
 const COLOR_CONST = 'aliceblue';
 
 /**
- * Default function for MedicalInfo Screen
+ * Default function for generating MedicalInfo Screen
  * @return {component} The Medical Info User Interface screen to be displayed
  */
-export default function MedicalInfoUI() {
 
+export default function MedicalInfoUI() {
   // Declare a const function, to save the information keyed in the MedicalInfo UI input boxes
-  const save = () =>{
+  const save = () => {
     // to be updated
-  }
+  };
 
   // Declare a const function, upon pressing the back button, return to main menu screen
-  const back = () =>{
+  const back = () => {
     // navigation.navigate("Main Menu");
-  }
+  };
   // Declare a new state variable, for changing Blood Type
   const [inputBloodType_text, onChangeBloodType_text] = React.useState(null);
 
@@ -78,18 +78,16 @@ export default function MedicalInfoUI() {
 
   return (
     // KeyboardAvoidingView to prevent input boxes from being blocked when keyboard comes up
-    <KeyboardAvoidingView
-      style = {styles.container}
-      behavior="padding"
-    >
-      // TouchableOpacity to highlight a 'touch' feel when back button is being pressed
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      // TouchableOpacity to highlight a 'touch' feel when back button is being
+      pressed
       <TouchableOpacity style={styles.backButton}>
-
         // To retrieve icon.png from assets folder
-        <Image source={require('./assets/backButtonIcon.png')} onPress={() => back}/>
-
+        <Image
+          source={require('./assets/backButtonIcon.png')}
+          onPress={() => back}
+        />
       </TouchableOpacity>
-
       // TextInput for user to enter their blood type
       <TextInput
         style={styles.inputBloodType}
@@ -157,18 +155,16 @@ export default function MedicalInfoUI() {
       />
       // Text style to display Medical Info title text
       <Text style={styles.titleText}>Medical Info</Text>
-
       // Text style to display Blood Type sub text
       <Text style={styles.bloodTypeSubText}>Blood Type</Text>
-      
       // Text style to display Heart Condition sub text
       <Text style={styles.heartConditionSubText}>Heart Condition</Text>
-
-      // View style to display save button container (uses default icon provided by Android/IOS)
+      // View style to display save button container (uses default icon provided
+      by Android/IOS)
       <View style={styles.saveButtonContainer}>
         <Button title="Save" onPress={() => save} />
       </View>
-    </KeyboardAvoidingView>   
+    </KeyboardAvoidingView>
   );
 }
 
@@ -276,7 +272,7 @@ const styles = StyleSheet.create({
     right: 20,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
-  
+
   // inputHeartConditionDetails (Text input for Heart Condition)
   inputHeartConditionDetails: {
     backgroundColor: 'white',
