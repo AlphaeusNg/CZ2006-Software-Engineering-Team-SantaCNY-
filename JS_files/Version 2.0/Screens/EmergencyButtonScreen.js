@@ -5,6 +5,11 @@ import SmsAndroid from 'react-native-get-sms-android';
 // import Sound from 'react-native-sound';
 
 
+/**
+ * Default function for the emergency button
+ * @module
+ * @return {component} The emergency button to be displayed
+ */
 function EmergencyButtonScreen() {
     // Ask permission for sending SMS
     const askSMSPermission = async () => {
@@ -32,7 +37,7 @@ function EmergencyButtonScreen() {
     // Send the SMS to target phone number
     const sendSMSHandler = () => {
         var phoneNumbers = {
-            "addressList": ["+6588906450"]          // target phone number
+            "addressList": ["+6588906450"]          // receiver's phone number
         };
         var message = "This is automated test message";
 
@@ -73,8 +78,10 @@ function EmergencyButtonScreen() {
         });
     }
 
-    let clickTime = 0;
+    let clickTime = 0;   // number of times the button has been clicked
 
+    // Handler for the emergency button 
+    // will send sms to the receiver and play alarm sound after tapping the button 3 times
     const emergencyBuuttonHandler = () => {
         console.log('emergency button clicked');
         clickTime++;
@@ -85,11 +92,14 @@ function EmergencyButtonScreen() {
         }
     }
 
+    // Handler for the emergency button 
+    // will stop the alarm sound
     const backButtonHandler = () => {
         clickTime = 0;
         alarmSound.stop(() => {
             console.log('alarm stopped');
         });
+        // Todo: back to the main UI
     }
 
 
@@ -107,6 +117,7 @@ function EmergencyButtonScreen() {
         </SafeAreaView>
     );
   }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -156,4 +167,4 @@ const styles = StyleSheet.create({
     }
 })
   
-  export default EmergencyButtonScreen;
+export default EmergencyButtonScreen;
