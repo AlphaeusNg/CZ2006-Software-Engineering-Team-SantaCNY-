@@ -96,7 +96,7 @@ function EmergencyButtonScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.returnButton} onPress={backButtonHandler}>
-                <Image style={styles.returnButtonImage} source={require("../assets/backIcon.png")}/>
+                <Image style={styles.returnButtonImage} source={require("./assets/backButtonIcon.png")}/>
             </TouchableOpacity>
             <View style={styles.emergencyButtonContainer}>
                 <TouchableOpacity style={styles.EmergencyButton} onPress={emergencyBuuttonHandler}>
