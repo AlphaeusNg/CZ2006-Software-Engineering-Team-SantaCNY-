@@ -21,6 +21,13 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const KML_FILE = 'https://geo.data.gov.sg/public-access-aed-locations/2019/03/21/kml/public-access-aed-locations.kml';
 
+
+/**
+ * Default function for generating Check AED Screen
+ * @module
+ * @return {component} The Check AED User Interface screen to be displayed
+ */
+
 class CheckAEDScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -100,6 +107,12 @@ const defaultProps = {
   enableHack: false,
   geolocationOptions: GEOLOCATION_OPTIONS,
 };
+
+/**
+ * Default function for locating the user's current location
+ * @module
+ * @return {component} The marker to show the current location
+ */
 
 export default class MyLocationMapMarker extends React.PureComponent {
   constructor(props) {
