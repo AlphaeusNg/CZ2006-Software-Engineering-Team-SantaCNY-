@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
+//Importing all different Screens
 import HomeScreen from './Screens/HomeScreen';
 import MainMenu from './Screens/MainMenu';
 import ResetPassword from './Screens/ResetPassword';
@@ -14,8 +14,16 @@ import EmergencyButtonScreen from './Screens/EmergencyButtonScreen';
 import MyLocationMapMarker from './Screens/CheckAEDScreen';
 
 
+//NativeStackNavigator initialisation
 const {Navigator,Screen} = createNativeStackNavigator();
 
+
+
+/**
+ * Default function for Navigating Screens holding all the different screen components
+ * @module
+ * 
+ */
 const AppNavigator = () => (
     <NavigationContainer>
         <Navigator 
