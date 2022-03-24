@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: UserScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: UserScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, Component } from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TouchableOpacity,
+    TextInput,
+    KeyboardAvoidingView
+} from 'react-native';
+
+/**
+ * Default function for generating User Screen
+ * @module
+ * @return {component} The User Info User Interface screen to be displayed
+ */
+
+export default function UserScreen() {
+
+    const [phoneNumber , setPhoneNumber] = useState('');
+    const [email , setEmail] = useState('');
+    const [emergCont1 , setEmergCont1] = useState('');
+    const [emergCont2 , setEmergCont2] = useState('');
+    const [emergMsg , setEmergMsg] = useState('');
+
+
+    return (
+        &lt;KeyboardAvoidingView
+            style = {styles.container}
+            behavior="padding"
+        >
+            &lt;View style={styles.header}>&lt;/View>
+            &lt;Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+            &lt;View style={styles.body}>
+                &lt;View style={styles.bodyContent}>
+                    &lt;Text style={styles.name}>Alexander Lim&lt;/Text>
+                    &lt;Text style={styles.info}>Age 30&lt;/Text>
+
+                    &lt;Text style={styles.label}>Phone Number&lt;/Text>
+                    &lt;TouchableOpacity style={styles.buttonContainer}>
+                        &lt;TextInput
+                            textAlign='center'
+                            onPressIn={setPhoneNumber}
+                            placeholder="Enter your Phone Number"
+                            value = {phoneNumber}/>
+                    &lt;/TouchableOpacity>
+
+                    &lt;Text style={styles.label}>Email Address&lt;/Text>
+                    &lt;TouchableOpacity style={styles.buttonContainer}>
+                        &lt;TextInput
+                            textAlign='center'
+                            onPressIn={setEmail}
+                            placeholder="Enter Your Email"
+                            value = {email}/>
+                    &lt;/TouchableOpacity>
+
+                    &lt;Text style={styles.label}>Emergency Contact 1&lt;/Text>
+                    &lt;TouchableOpacity style={styles.buttonContainer}>
+                        &lt;TextInput
+                            textAlign='center'
+                            onPressIn={setEmergCont1}
+                            placeholder="Enter Emergency Contact"
+                            value = {emergCont1}/>
+                    &lt;/TouchableOpacity>
+
+                    &lt;Text style={styles.label}>Emergency Contact 2&lt;/Text>
+                    &lt;TouchableOpacity style={styles.buttonContainer}>
+                        &lt;TextInput
+                            textAlign='center'
+                            onPressIn={setEmergCont2}
+                            placeholder="Enter Emergency Contact"
+                            value = {emergCont2}/>
+                    &lt;/TouchableOpacity>
+
+                    &lt;Text style={styles.label}>Emergency Message&lt;/Text>
+                    &lt;TouchableOpacity style={styles.emergencyMessage}>
+                        &lt;TextInput
+                            textAlign='center'
+                            onPressIn={setEmergMsg}
+                            placeholder="Edit Emergency Message"
+                            value = {emergMsg}/>
+                    &lt;/TouchableOpacity>
+
+                &lt;/View>
+            &lt;/View>
+        &lt;/KeyboardAvoidingView>
+    );
+
+}
+
+const styles = StyleSheet.create({
+    header: {
+        backgroundColor: "darkturquoise",
+        height:100,
+    },
+    avatar: {
+        width: 130,
+        height: 130,
+        borderRadius: 63,
+        borderWidth: 4,
+        borderColor: "white",
+        marginBottom:10,
+        alignSelf:'center',
+        position: 'absolute',
+        marginTop:30
+    },
+    name:{
+        fontSize:18,
+        color:"black",
+        fontWeight:'600',
+    },
+    body:{
+        marginTop:40,
+    },
+    bodyContent: {
+        flex: 1,
+        alignItems: 'center',
+        padding:30,
+    },
+    label:{
+        fontSize: 12,
+        color: 'black',
+        fontWeight: '500'
+
+    },
+    info:{
+        fontSize:10,
+        color: "grey",
+        marginBottom: 10
+    },
+    buttonContainer: {
+        marginTop:10,
+        height:45,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom:20,
+        width:250,
+        borderRadius:30,
+        backgroundColor: "aliceblue",
+    },
+    emergencyMessage: {
+        marginTop:10,
+        height:70,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom:20,
+        width:250,
+        borderRadius:30,
+        borderColor: 'grey',
+        borderWidth: 1
+    },
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-CheckAEDScreen.html">CheckAEDScreen</a></li><li><a href="module-EmergencyButtonScreen.html">EmergencyButtonScreen</a></li><li><a href="module-GuideInfoScreen.html">GuideInfoScreen</a></li><li><a href="module-HomeScreen.html">HomeScreen</a></li><li><a href="module-LoginScreen.html">LoginScreen</a></li><li><a href="module-MainMenu.html">MainMenu</a></li><li><a href="module-MedicalInfoUI.html">MedicalInfoUI</a></li><li><a href="module-RegistrationScreen.html">RegistrationScreen</a></li><li><a href="module-ResetPassword.html">ResetPassword</a></li><li><a href="module-UserScreen.html">UserScreen</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Mar 24 2022 08:27:07 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

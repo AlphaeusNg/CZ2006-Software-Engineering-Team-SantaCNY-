@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: GuideInfoScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: GuideInfoScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import {
+    SafeAreaView,
+    Text,
+    StyleSheet,
+    View,
+    FlatList,
+    TextInput,
+} from 'react-native';
+
+/**
+ * Default function for generating Guide Info Screen
+ * @module
+ * @return {component} The Guide Info User Interface screen to be displayed
+ */
+
+const GuideInfoUI = () => {
+
+    // INCOMPLETE: Line 18-32 -- Need to fetch from Firebase Database
+    // INCOMPLETE: Line36-64 -- Search Filtering
+
+
+
+    const [search, setSearch] = useState('');
+    const [filteredDataSource, setFilteredDataSource] = useState([]);
+    const [masterDataSource, setMasterDataSource] = useState([]);
+
+    useEffect(() => {
+        fetch('')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                setFilteredDataSource(responseJson);
+                setMasterDataSource(responseJson);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    /**
+     * Function for Filtering Search Results
+     * @module
+     * @return {boolean} The User Info User Interface screen to be displayed
+     */
+
+    const searchFilterFunction = (text) => {
+
+        // Check if searched text is not blank
+
+        if (text) {
+
+            // Inserted text is not blank
+            // Filter the masterDataSource and update FilteredDataSource
+
+            const newData = masterDataSource.filter(function (item) {
+
+                // Applying filter for the inserted text in search bar
+                const itemData = item.title
+                    ? item.title.toUpperCase()
+                    : ''.toUpperCase();
+                const textData = text.toUpperCase();
+                return itemData.indexOf(textData) > -1;
+            });
+            setFilteredDataSource(newData);
+            setSearch(text);
+        } else {
+
+            // Inserted text is blank
+            // Update FilteredDataSource with masterDataSource
+
+            setFilteredDataSource(masterDataSource);
+            setSearch(text);
+        }
+    };
+
+    /**
+     * Function for Displaying List of Guides
+     * @module
+     * @return {component} Array of displayed Guides updated
+     */
+
+    const ItemView = ({ item }) => {
+        return (
+            // Flat List Item
+            &lt;Text style={styles.itemStyle} onPress={() => getItem(item)}>
+                {item.id}
+                {'.'}
+                {item.title.toUpperCase()}
+            &lt;/Text>
+        );
+    };
+
+    const ItemSeparatorView = () => {
+        return (
+            // Flat List Item Separator
+            &lt;View
+                style={{
+                    height: 0.5,
+                    width: '100%',
+                    backgroundColor: '#C8C8C8',
+                }}
+            />
+        );
+    };
+
+    const getItem = (item) => {
+        // Function for click on an item
+        alert('Id : ' + item.id + ' Title : ' + item.title);
+    };
+
+
+    return (
+
+        &lt;View style = {styles.container}>
+            &lt;TextInput
+                style = {styles.textInputStyle}
+                onChangeText={(text) => searchFilterFunction(text)}
+                value = {search}
+                underlineColorAndroid = "transparent"
+                placeholder = "Search Here"
+            />
+            &lt;FlatList
+                data={filteredDataSource}
+                keyExtractor = {(item, index) => index.toString()}
+                ItemSeparatorComponent = {ItemSeparatorView}
+                renderItem = {ItemView}
+            />
+        &lt;/View>
+
+
+    );
+
+};
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white',
+    },
+    itemStyle: {
+        padding: 10,
+    },
+    textInputStyle: {
+        height: 40,
+        borderWidth: 1,
+        paddingLeft: 20,
+        margin: 5,
+        borderColor: '#009688',
+        backgroundColor: '#FFFFFF',
+    },
+});
+
+export default GuideInfoUI;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-CheckAEDScreen.html">CheckAEDScreen</a></li><li><a href="module-EmergencyButtonScreen.html">EmergencyButtonScreen</a></li><li><a href="module-GuideInfoScreen.html">GuideInfoScreen</a></li><li><a href="module-HomeScreen.html">HomeScreen</a></li><li><a href="module-LoginScreen.html">LoginScreen</a></li><li><a href="module-MainMenu.html">MainMenu</a></li><li><a href="module-MedicalInfoUI.html">MedicalInfoUI</a></li><li><a href="module-RegistrationScreen.html">RegistrationScreen</a></li><li><a href="module-ResetPassword.html">ResetPassword</a></li><li><a href="module-UserScreen.html">UserScreen</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Thu Mar 24 2022 08:27:07 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
