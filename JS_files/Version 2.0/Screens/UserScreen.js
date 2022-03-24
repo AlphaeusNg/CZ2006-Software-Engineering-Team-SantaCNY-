@@ -9,6 +9,12 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 
+/**
+ * Default function for generating User Screen
+ * @module
+ * @return {component} The User Info User Interface screen to be displayed
+ */
+
 export default function UserScreen() {
 
   const [phoneNumber , setPhoneNumber] = useState('');

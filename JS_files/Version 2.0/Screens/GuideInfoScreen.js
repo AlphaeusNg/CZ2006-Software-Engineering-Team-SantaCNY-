@@ -8,13 +8,19 @@ import {
   TextInput,
 } from 'react-native';
 
+/**
+ * Default function for generating Guide Info Screen
+ * @module
+ * @return {component} The Guide Info User Interface screen to be displayed
+ */
+
 const GuideInfoUI = () => {
 
   // INCOMPLETE: Line 18-32 -- Need to fetch from Firebase Database
   // INCOMPLETE: Line36-64 -- Search Filtering
 
   
-  /*
+  
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -31,7 +37,11 @@ const GuideInfoUI = () => {
       });
   }, []);
 
-  
+  /**
+ * Function for Filtering Search Results
+ * @module
+ * @return {boolean} The User Info User Interface screen to be displayed
+ */
 
   const searchFilterFunction = (text) => {
 
@@ -62,8 +72,12 @@ const GuideInfoUI = () => {
       setSearch(text);
     }
   };
-  */
   
+/**
+ * Function for Displaying List of Guides
+ * @module
+ * @return {component} Array of displayed Guides updated
+ */
 
   const ItemView = ({ item }) => {
     return (
