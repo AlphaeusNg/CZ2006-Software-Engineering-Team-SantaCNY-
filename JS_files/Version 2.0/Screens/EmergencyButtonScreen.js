@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, Text, Button, View, Image,
         PermissionsAndroid, TouchableOpacity, StyleSheet } from 'react-native';
 import SmsAndroid from 'react-native-get-sms-android';
-// import Sound from 'react-native-sound';
+import Sound from 'react-native-sound';
+import PushNotification from "react-native-push-notification";
+import { firebase } from '@react-native-firebase/database';
+import Geolocation from '@react-native-community/geolocation';
+import Geocoder from 'react-native-geocoding';
+import { getDistance } from 'geolib';
 
 
 /**
@@ -11,6 +16,31 @@ import SmsAndroid from 'react-native-get-sms-android';
  * @return {component} The emergency button to be displayed
  */
 function EmergencyButtonScreen() {
+    // Refer to firebase realtime database
+    const databaseRef = firebase
+    .app()
+    .database('https://healthapp2-388fc-default-rtdb.asia-southeast1.firebasedatabase.app/')
+    .ref('Trigger');
+
+    // Ask permission to access user's location
+    const askLocationPermission = async () => {
+        if (Platform.OS === 'android') {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                title: 'Example App ACCESS_FINE_LOCATION Permission',
+                message: 'Example App needs access to your ACCESS_FINE_LOCATION',
+                },
+            );
+            console.log(granted);
+        }
+    }
+
+    askLocationPermission();
+
+    // Initialize Geocoder
+    Geocoder.init("AIzaSyC3qeIg0RnndQLfOZUEqerrlwhWNTtA6KE");
+
     // Ask permission for sending SMS
     const askSMSPermission = async () => {
         if (Platform.OS === 'android') {
@@ -34,28 +64,44 @@ function EmergencyButtonScreen() {
 
     askSMSPermission();
 
-    // Send the SMS to target phone number
+    // Send the SMS to target phone numbers
     const sendSMSHandler = () => {
         var phoneNumbers = {
             "addressList": ["+6588906450"]          // receiver's phone number
+            // add emergency contact numbers later
         };
-        var message = "This is automated test message";
 
-        SmsAndroid.autoSend(
-            JSON.stringify(phoneNumbers),
-            message,
-            (fail) => {
-            console.log('Failed with this error: ' + fail);
-            },
-            (success) => {
-            console.log('SMS sent successfully');
-            },
-        );
+        // Extract sender's coordinates
+        Geolocation.getCurrentPosition( 
+            (position) => { 
+                var coord = position.coords;
+                // Convert coordinates to address
+                Geocoder
+                    .from(coord.latitude, coord.longitude)
+                    .then(json => {
+                        var message = "The owner of this number is in an emergency and needs your help!! His/her current location: " 
+                                      + json.results[0].formatted_address + " (" + coord.latitude + ", " + coord.longitude + ").";
+                        // Send the SMS
+                        SmsAndroid.autoSend(
+                            JSON.stringify(phoneNumbers),
+                            message,
+                            (fail) => {
+                                console.log('Failed with this error: ' + fail);
+                            },
+                            (success) => {
+                                console.log('SMS sent successfully');
+                            },
+                        );
+                    })
+                    .catch(error =>
+                        console.warn(error)
+                    );
+            }
+        )
     }
 
 
     // Set alarm sound
-    var Sound = require('react-native-sound');
     Sound.setCategory('Playback');
     var alarmSound = new Sound('alarm_sound.mp3', Sound.MAIN_BUNDLE, (error) => {
         if (error) {
@@ -78,6 +124,103 @@ function EmergencyButtonScreen() {
         });
     }
 
+
+    // Configurations for local push notifications
+    const notificationConfig = () => {
+        PushNotification.configure({
+            // (required) Called when a remote is received or opened, or local notification is opened
+            onNotification: function (notification) {
+              console.log("NOTIFICATION:", notification);
+              // process the notification
+            },
+          });
+        PushNotification.createChannel(
+            {
+                channelId: "0",
+                channelName: "Local Channel",
+                channelDescription: "A channel for local push notifications",
+                playSound: false,
+            },
+            (created) => {
+                if (created) {
+                    console.log('Notification channel created successfully')
+                } else {
+                    console.log('Notification channel already exists')
+                }
+            }
+        );
+    }
+
+    notificationConfig();
+
+    let isFirstTime = true;   
+    
+    // Listen to changes in database
+    databaseRef
+        .on('value', snapshot => {
+            if (isFirstTime) {
+                isFirstTime = false;  // do not push notification when first reading the database
+            } else {
+                // Get sender's address and coordinates
+                let info_other = snapshot.val();
+
+                // Get receiver's coordinates
+                Geolocation.getCurrentPosition( 
+                    (position) => { 
+                        // Calculate distance between sender and receiver
+                        let distance = getDistance(
+                            { latitude: position.coords.latitude, longitude: position.coords.longitude },
+                            { latitude: info_other.latitude, longitude: info_other.longitude }
+                        );
+                        if (distance <= 500) {
+                            PushNotification.localNotification({
+                                channelId: "0",
+                                title: "EMERGENCY HELP!",
+                                message: "Someone is in an emergency and needs your help!! His/her current location: " 
+                                      + info_other.address + " (" + info_other.latitude + ", " + info_other.longitude + ").",
+                            });
+                        }
+                    })
+            }
+        });
+
+
+    // Push notification to users
+    const sendNotification = ()  => {
+        // Get sender's coordinates
+        Geolocation.getCurrentPosition( 
+            (position) => { 
+                // Convert sender's coordinates into address
+                Geocoder.from(position.coords.latitude, position.coords.longitude)
+                    .then(json => {
+                        var info = {
+                            latitude: position.coords.latitude, 
+                            longitude: position.coords.longitude,
+                            address: json.results[0].formatted_address,
+                        };
+                        // Update database
+                        databaseRef
+                            .update(info)
+                            .then(() => console.log('Coordinates updated to database', info))
+                    })
+                    .catch(error =>
+                        console.warn(error)
+                    );
+            }, 
+            (error) => { 
+                console.log(error.code, error.message); 
+            }, 
+        ); 
+    }
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         sendNotification();
+    //     }, 15000);
+    //     return () => clearInterval(interval);
+    //   }, []);
+
+
     let clickTime = 0;   // number of times the button has been clicked
 
     // Handler for the emergency button 
@@ -88,6 +231,7 @@ function EmergencyButtonScreen() {
         if (clickTime == 3) {
             sendSMSHandler();
             playAlarmHandler();
+            sendNotification();
             clickTime = 0;
         }
     }
@@ -106,7 +250,7 @@ function EmergencyButtonScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.returnButton} onPress={backButtonHandler}>
-                <Image style={styles.returnButtonImage} source={require("./assets/backButtonIcon.png")}/>
+                <Image style={styles.returnButtonImage} source={require("../assets/backButtonIcon.png")}/>
             </TouchableOpacity>
             <View style={styles.emergencyButtonContainer}>
                 <TouchableOpacity style={styles.EmergencyButton} onPress={emergencyBuuttonHandler}>
