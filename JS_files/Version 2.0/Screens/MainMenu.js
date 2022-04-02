@@ -3,12 +3,12 @@ import { View, Text, Image, ScrollView, StyleSheet, Dimensions, TouchableNativeF
 
 
 import { useNavigation } from '@react-navigation/native';
-import AppLoading from 'expo-app-loading';
-import {
-	useFonts, 
-	Comfortaa_400Regular,
-	SourceSansPro_400Regular
-	} from "@expo-google-fonts/dev";
+// import AppLoading from 'expo-app-loading';
+// import {
+// 	useFonts, 
+// 	Comfortaa_400Regular,
+// 	SourceSansPro_400Regular
+// 	} from "@expo-google-fonts/dev";
 
 /**
  * Default function for generating MainMenu Screen
@@ -33,7 +33,7 @@ const MainMenu = () => {
     }
 	//declare constant function for AED navigation
     const AEDNavigation = () =>{
-        navigation.navigate("Home");
+        navigation.navigate("Check AED");
     }
 	//declare constant function for emergency button navigation
 	const ebuttonNavigation  = () => {
@@ -45,13 +45,13 @@ const MainMenu = () => {
 	}
 
     // FONTS
-	let [fontsLoaded] = useFonts({
-		Comfortaa_400Regular,
-        SourceSansPro_400Regular
-	});
-    if (!fontsLoaded) {
-        return <AppLoading />;
-      } else {
+	// let [fontsLoaded] = useFonts({
+	// 	Comfortaa_400Regular,
+    //     SourceSansPro_400Regular
+	// });
+    // if (!fontsLoaded) {
+    //     return <AppLoading />;
+    //   } else {
 	return (
 		<ScrollView bounces={false} style = {stylesheet.Main_Menu_Page}>
 		<View style = {stylesheet.Main_Menu_Page}>
@@ -122,21 +122,23 @@ const MainMenu = () => {
 					</Text>
 					</View>
 				</View>
-				<View style = {stylesheet.AED_Box}>
-					<Image style = {stylesheet.AED_Icon} source = {{uri: AED_image_URL}}>
-					</Image>
-					<View style = {[stylesheet.AED_Text]}>
-					<Text style = {[stylesheet.AED_Text]}>
-						View Nearby AED
-					</Text>
+				<TouchableNativeFeedback onPress={AEDNavigation}>
+					<View style = {stylesheet.AED_Box}>
+						<Image style = {stylesheet.AED_Icon} source = {{uri: AED_image_URL}}>
+						</Image>
+						<View style = {[stylesheet.AED_Text]}>
+						<Text style = {[stylesheet.AED_Text]}>
+							View Nearby AED
+						</Text>
+						</View>
 					</View>
-				</View>
+				</TouchableNativeFeedback>
 			</View>
 		</View>
 		</ScrollView>
 	)
 }
-}
+// }
 
 
 export default MainMenu
@@ -309,7 +311,7 @@ const stylesheet = StyleSheet.create({
 		fontWeight: '400',
 		textDecorationLine: "none",
 		lineHeight: 40,
-		fontSize: 16,
+		fontSize: 15,
 		color: "rgba(9, 16, 29, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
