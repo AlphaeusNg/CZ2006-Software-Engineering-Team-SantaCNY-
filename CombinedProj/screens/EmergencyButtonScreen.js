@@ -41,7 +41,7 @@ function EmergencyButtonScreen() {
     askLocationPermission();
 
     // Initialize Geocoder
-    Geocoder.init("AIzaSyC3qeIg0RnndQLfOZUEqerrlwhWNTtA6KE");
+    Geocoder.init("");    // fill in the google api key
 
     // Ask permission for sending SMS
     const askSMSPermission = async () => {

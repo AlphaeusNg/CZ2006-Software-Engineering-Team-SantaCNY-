@@ -18,7 +18,7 @@ const MainMenu = () => {
     }
 	//declare constant function for Profile navigation
     const ProfileNavigation = () =>{
-        navigation.navigate("Home");
+        navigation.navigate("Profile");
     }
 	//declare constant function for GuideInfo navigation
     const GuideNavigation = () =>{

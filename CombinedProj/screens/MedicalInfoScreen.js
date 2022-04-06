@@ -1,24 +1,16 @@
 // External changes to make:
 // change in your manifest file: (android:windowSoftInputMode="adjustPan") for keyboardavoidingview to work
 
-import React from 'react';
-//import { NavigationContainer } from '@react-navigation/native';
-//import { useNavigation } from '@react-navigation/native';
-
-// Import relevant tools from react-native
+import React, { useState, useEffect } from 'react';
+import {firebase} from '@react-native-firebase/database';
 import {
   Dimensions,
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
   Button,
   TextInput,
   KeyboardAvoidingView,
-  Platform,
-  ScrollView,
 } from 'react-native';
 
 // Ensure that input box are dynamically updated to screen size
@@ -28,7 +20,7 @@ const SCREEN_WIDTH = Dimensions.get('screen').width - 30;
 const BORDER_BOTTOM_WIDTH_CONST = 1;
 
 // Constant value for first text location, subsequent texts are positioned according to this cornerstone text
-const FIRSTTEXT_CONST = 230;
+const FIRSTTEXT_CONST = 180;
 
 // Constant different values for easy change of all input boxes
 const DIFFERENCE_CONST = 40;
@@ -43,122 +35,168 @@ const COLOR_CONST = 'aliceblue';
  */
 
 export default function MedicalInfoUI() {
-  // Declare a const function, to save the information keyed in the MedicalInfo UI input boxes
-  const save = () => {
-    // to be updated
-  };
+    // Declare a new state variable, for changing Blood Type
+    const [bloodType, setBloodType] = useState(null);
 
-  // Declare a const function, upon pressing the back button, return to main menu screen
-  const back = () => {
-    // navigation.navigate("Main Menu");
-  };
-  // Declare a new state variable, for changing Blood Type
-  const [inputBloodType_text, onChangeBloodType_text] = React.useState(null);
+    // Declare a new state variable, for changing Heart Condition
+    const [heartCondition, setHeartCondition] = useState(null);
+  
+    // Declare a new state variable, for changing Asthma Condition
+    const [asthma, setAsthma] = useState(null);
+  
+    // Declare a new state variable, for changing Allergy Condition
+    const [allergy, setAllergy] = useState(null);
+  
+    // Declare a new state variable, for changing Drug Allergy Condition
+    const [drugAllergies, setDrugAllergies] = useState(null);
+  
+    // Declare a new state variable, for changing Health Condition Details
+    const [heartConditionDetails, setHeartConditionDetails] = useState(null);
+  
+    // Declare a new state variable, for changing Health Conditions
+    const [otherHealthCondition, setOtherHealthCondition] = useState(null);
 
-  // Declare a new state variable, for changing Heart Condition
-  const [inputHeartCondition_text, onChangeHeartCondition_text] =
-    React.useState(null);
+    // Get userId
+    const user = firebase.auth().currentUser;
+    if (user) {
+      console.log('uid: ', user.uid);
+    } else {
+      console.log('fail to get user id')
+    }
+    
+    // Refer to firebase realtime database
+    const databaseRef = firebase
+        .app()
+        .database('https://healthapp2-388fc-default-rtdb.asia-southeast1.firebasedatabase.app/')
+        .ref('/MedicalInfo/' + user.uid)
 
-  // Declare a new state variable, for changing Asthma Condition
-  const [inputAsthma_text, onChangeAsthma_text] = React.useState(null);
+    // Read medical info of the current user
+    useEffect(() => {      
+        databaseRef
+            .once('value')
+            .then(snapshot => {
+              let info = snapshot.val();
+                if (info != null) {
+                  setBloodType(info.bloodType);
+                  setHeartCondition(info.heartCondition)
+                  setAsthma(info.asthma);
+                  setAllergy(info.allergy);
+                  setDrugAllergies(info.drugAllergy);
+                  setHeartConditionDetails(info.heartConditionDetails);
+                  setOtherHealthCondition(info.otherHealthCondition);
+                }
+            });
+    }, []);
 
-  // Declare a new state variable, for changing Allergy Condition
-  const [inputAllergy_text, onChangeAllergy_text] = React.useState(null);
+  /**
+   * Declare a const 'save' function, to save the information keyed in the MedicalInfo UI input boxes
+   * @property {string} bloodType             - user info blood type
+   * @property {string} heartConditionDetails - user info heart condition details
+   * @property {string} allergy               - user info allergy
+   * @property {string} drugAllergy           - user info drug allergy
+   * @property {string} heartCondition        - user info heart condition
+   * @property {string} asthma                - user info asthma
+   * @property {string} otherHealthCondition  - user info other health conditions
+  */
+  const saveButtonHandler = async () => {
+    let info = {
+        bloodType: bloodType,
+        heartConditionDetails: heartConditionDetails,
+        allergy: allergy,
+        drugAllergy: drugAllergies,
+        heartCondition: heartCondition,
+        asthma: asthma,
+        otherHealthCondition: otherHealthCondition,
+    }
+    console.log(allergy);
 
-  // Declare a new state variable, for changing Drug Allergy Condition
-  const [inputDrugAllergiesy_text, onChangeDrugAllergies_text] =
-    React.useState(null);
+    databaseRef
+        .update(info)
+        .then(() => console.log('Medical Info updated.'));
+  }
 
-  // Declare a new state variable, for changing Health Condition Details
-  const [inputHealthConditionDetails_text, onChangeHeartConditionDetails_text] =
-    React.useState(null);
-
-  // Declare a new state variable, for changing Health Conditions
-  const [inputotherHealthCondition_text, onChangeotherHealthCondition_text] =
-    React.useState(null);
 
   return (
     // KeyboardAvoidingView to prevent input boxes from being blocked when keyboard comes up
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      {/* // TouchableOpacity to highlight a 'touch' feel when back button is being */}
-      pressed
-      <TouchableOpacity style={styles.backButton}>
-      </TouchableOpacity>
-      {/* // TextInput for user to enter their blood type */}
+      {/* TextInput for user to enter their blood type */}
       <TextInput
         style={styles.inputBloodType}
         textAlign="center"
         placeholder="Enter your blood type"
-        keyboardType="alphanumeric"
-        onChangeBloodType_text={onChangeBloodType_text}
-        value={inputBloodType_text}
+        onChangeText={(text) => setBloodType(text)}
+        value={bloodType}
       />
-      {/* // TextInput for user to enter their allergies */}
+      {/* TextInput for user to enter their allergies */}
       <TextInput
         style={styles.inputAllergies}
-        textAlign="left"
+        textAlign="center"
         placeholder="Allergies"
-        keyboardType="alphanumeric"
-        onChangeAllergy_text={onChangeAllergy_text}
-        value={inputAllergy_text}
+        onChangeText={(text) => {
+          setAllergy(text);
+        }}
+        value={allergy}
       />
-      {/* // TextInput for user to enter their drug allergies */}
+      {/* TextInput for user to enter their drug allergies */}
       <TextInput
         style={styles.inputDrugAllergies}
-        textAlign="left"
+        textAlign="center"
         placeholder="Drug Allergies"
-        keyboardType="alphanumeric"
-        onChangeDrugAllergies_text={onChangeDrugAllergies_text}
-        value={inputDrugAllergiesy_text}
+        onChangeText={(text) => setDrugAllergies(text)}
+        value={drugAllergies}
       />
-      {/* // TextInput for user to enter their heart condition */}
+      {/* TextInput for user to enter their heart condition */}
       <TextInput
         style={styles.inputHeartCondition}
         textAlign="center"
-        onChangeHeartCondition_text={onChangeHeartCondition_text}
-        value={inputHeartCondition_text}
+        onChangeText={(text) => setHeartCondition(text)}
+        value={heartCondition}
         placeholder="No"
-        keyboardType="alphanumeric"
       />
-      {/* // Text style for Asthma text */}
+      {/* Text style for Asthma text */}
       <Text style={styles.asthmaSubText}>Asthma</Text>
-      {/* // TextInput for user to enter their asthma condition */}
+      {/* TextInput for user to enter their asthma condition */}
       <TextInput
         style={styles.inputAsthma}
         textAlign="center"
-        onChangeAsthma_text={onChangeAsthma_text}
-        value={inputAsthma_text}
+        onChangeText={(text) => setAsthma(text)}
+        value={asthma}
         placeholder="No"
-        keyboardType="alphanumeric"
       />
       {/* // TextInput for user to enter their heart condition details */}
       <TextInput
         style={styles.inputHeartConditionDetails}
         textAlign="left"
-        onChangeHeartConditionDetails_text={onChangeHeartConditionDetails_text}
-        value={inputHealthConditionDetails_text}
+        onChangeText={(text) => setHeartConditionDetails(text)}
+        value={heartConditionDetails}
         placeholder="Heart condition details"
-        keyboardType="alphanumeric"
       />
       {/* // TextInput for user to enter other heart conditions */}
       <TextInput
         style={styles.otherHealthCondition}
         textAlign="left"
-        onChangeotherHealthCondition_text={onChangeotherHealthCondition_text}
-        value={inputotherHealthCondition_text}
+        onChangeText={(text) => setOtherHealthCondition(text)}
+        value={otherHealthCondition}
         placeholder="Other Health Conditions"
-        keyboardType="alphanumeric"
       />
       {/* // Text style to display Medical Info title text */}
       <Text style={styles.titleText}>Medical Info</Text>
       {/* // Text style to display Blood Type sub text */}
       <Text style={styles.bloodTypeSubText}>Blood Type</Text>
+      {/* // Text style to display Allergy text */}
+      <Text style={styles.allergySubText}>Allergy</Text>
+      {/* // Text style to display Drug Allergy text */}
+      <Text style={styles.drugAllergySubText}>Drug Allergy</Text>
       {/* // Text style to display Heart Condition sub text */}
-      <Text style={styles.heartConditionSubText}>Heart Condition</Text>
+      <Text style={styles.heartConditionSubText}>Heart Condition (HC)</Text>
+      {/* // Text style to display Heart Condition Details sub text */}
+      <Text style={styles.heartConditionDetails}>HC details</Text>
+      {/* // Text style to display Other Health Condition Details sub text */}
+      <Text style={styles.otherHealthConditionSubText}>Other Health Conditions</Text>
       {/* // View style to display save button container (uses default icon provided
       by Android/IOS) */}
       <View style={styles.saveButtonContainer}>
-        <Button title="Save" onPress={() => save} />
+        <Button title="Save" onPress={saveButtonHandler} />
       </View>
     </KeyboardAvoidingView>
   );
@@ -214,36 +252,50 @@ const styles = StyleSheet.create({
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
+  // allergySubText style (Text output for allergies)
+  allergySubText: {
+    fontSize: 23,
+    fontWeight: 'normal',
+    position: 'absolute',
+    left: 25,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*1.5,
+  },
+
   // inputAllergies style (Text input for allergies)
   inputAllergies: {
-    backgroundColor: 'white',
-    color: 'grey',
-    width: SCREEN_WIDTH,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    backgroundColor: COLOR_CONST,
+    width: SCREEN_WIDTH/1.5,
+    paddingHorizontal: 25,
+    paddingVertical: 7,
     borderRadius: 20,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST,
-    left: 15,
-    fontSize: 20,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*1.3,
+    right: 15,
     flex: 1,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
+  // drugAllergySubText style (Text output for drug allergies)
+  drugAllergySubText: {
+    fontSize: 23,
+    fontWeight: 'normal',
+    position: 'absolute',
+    left: 25,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*3,
+  },
+
   // inputDrugAllergies (Text input for drug allergies)
   inputDrugAllergies: {
-    backgroundColor: 'white',
-    color: 'grey',
-    width: SCREEN_WIDTH,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    backgroundColor: COLOR_CONST,
+    width: SCREEN_WIDTH/1.8,
+    paddingHorizontal: 25,
+    paddingVertical: 7,
     borderRadius: 20,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 2.5,
-    left: 15,
-    fontSize: 20,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 2.7,
+    right: 15,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
@@ -256,7 +308,7 @@ const styles = StyleSheet.create({
     top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 4.5,
   },
 
-  // heartCondition (Text input for Heart Condition)
+  // inputHeartCondition (Text input for Heart Condition)
   inputHeartCondition: {
     backgroundColor: COLOR_CONST,
     paddingHorizontal: 25,
@@ -269,18 +321,25 @@ const styles = StyleSheet.create({
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
+  // heartConditionDetails (Text output for Heart Condition Details)
+  heartConditionDetails: {
+    fontSize: 23,
+    fontWeight: 'normal',
+    position: 'absolute',
+    left: 25,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*7,
+  },
   // inputHeartConditionDetails (Text input for Heart Condition)
   inputHeartConditionDetails: {
-    backgroundColor: 'white',
+    backgroundColor: COLOR_CONST,
     width: SCREEN_WIDTH,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 25,
+    paddingVertical: 7,
     borderRadius: 20,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 5.5,
-    left: 15,
-    fontSize: 20,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 7.7,
+    right: 15,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
@@ -290,7 +349,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 7.5,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST *5.8,
   },
 
   // inputAsthma (Text input for Asthma)
@@ -301,24 +360,32 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 7.5 - 10,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 5.8 - 10,
     right: 20,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
+  // otherHealthConditionSubText (Text output for other Health Condition)
+  otherHealthConditionSubText: {
+    fontSize: 23,
+    fontWeight: 'normal',
+    position: 'absolute',
+    left: 25,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST *9.2,
+  },
+
   // otherHealthCondition (Text output for Other Health Condition)
   otherHealthCondition: {
-    backgroundColor: 'white',
+    backgroundColor: COLOR_CONST,
     color: 'grey',
     width: SCREEN_WIDTH,
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 25,
     borderRadius: 20,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 8.5,
-    left: 15,
-    fontSize: 20,
+    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 9.8,
+    right: 15,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 

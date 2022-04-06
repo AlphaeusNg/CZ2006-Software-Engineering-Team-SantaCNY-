@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, TextInput, Image, ScrollView, StyleSheet, Dimensions,TouchableOpacity ,styles} from "react-native";
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-// import AppLoading from 'expo-app-loading';
 
 // import {
 //     useFonts,
@@ -19,12 +18,10 @@ export default function ResetPassword (){
 	// Declare a new state variable, for setting Email
     const [Email, setEmail] = useState('')
     const navigation = useNavigation()
-    // const navigation = useNavigation()
     const forgotPassword = () => {
       auth().sendPasswordResetEmail(Email)
         .then(() => {
-          console.log("Password reset email sent!");
-          // ..
+					alert('The password reset link is sent to your email!');
         })
         .catch((error) => {
 			const errorCode = error.code;
@@ -47,8 +44,7 @@ export default function ResetPassword (){
 			<View style = {stylesheet._Component}>
 				<View style = {[stylesheet._Enter_your_registered_phone_number_or_email_address, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
 				<Text style = {[stylesheet._Enter_your_registered_phone_number_or_email_address, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-					Enter your registered phone number 
-or email address
+					Enter your registered phone number or email address
 				</Text>
 				</View>
 			</View>
@@ -80,7 +76,6 @@ or email address
 		</ScrollView>
 	)
 }
-// }
 
 const stylesheet = StyleSheet.create({
 	//_Login_Page(Styling for loginpage)

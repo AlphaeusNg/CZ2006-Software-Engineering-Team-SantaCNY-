@@ -26,7 +26,7 @@ const GuideInfoUI = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('')
+    fetch('')      // fill in firebase database json url
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -55,8 +55,8 @@ const GuideInfoUI = () => {
       const newData = masterDataSource.filter(function (item) {
 
         // Applying filter for the inserted text in search bar
-        const itemData = item.title
-          ? item.title.toUpperCase()
+        const itemData = item.type
+          ? item.type.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -83,9 +83,7 @@ const GuideInfoUI = () => {
     return (
       // Flat List Item
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.id}
-        {'.'}
-        {item.title.toUpperCase()}
+        {item.type}
       </Text>
     );
   };
@@ -105,7 +103,7 @@ const GuideInfoUI = () => {
 
   const getItem = (item) => {
     // Function for click on an item
-    alert('Id : ' + item.id + ' Title : ' + item.title);
+    alert(item.type + ': ' + item.instruction);
   };
 
   
