@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, Image, ScrollView, StyleSheet, Dimensions } from "react-native";
+import { View, Text, TextInput, Image, ScrollView, StyleSheet, Dimensions,TouchableOpacity ,styles} from "react-native";
+import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
+// import AppLoading from 'expo-app-loading';
 
+// import {
+//     useFonts,
+// 	Comfortaa_400Regular,
+// 	Roboto_400Regular
+// } from "@expo-google-fonts/dev";
 
 /**
  * Default function for generating ResetPassword Screen
@@ -10,8 +18,22 @@ import { View, Text, TextInput, Image, ScrollView, StyleSheet, Dimensions } from
 export default function ResetPassword (){
 	// Declare a new state variable, for setting Email
     const [Email, setEmail] = useState('')
+    const navigation = useNavigation()
+    // const navigation = useNavigation()
+    const forgotPassword = () => {
+      auth().sendPasswordResetEmail(Email)
+        .then(() => {
+          console.log("Password reset email sent!");
+          // ..
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+      navigation.navigate("Login");
+    };
 
-	
 	return (
 		<ScrollView bounces={false} showsVerticalScrollIndicator={false} style={{height: Dimensions.get("window").height}}>
 		<View style = {stylesheet._Login_Page}>
@@ -25,7 +47,8 @@ export default function ResetPassword (){
 			<View style = {stylesheet._Component}>
 				<View style = {[stylesheet._Enter_your_registered_phone_number_or_email_address, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
 				<Text style = {[stylesheet._Enter_your_registered_phone_number_or_email_address, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-					Enter your registered phone number or email address
+					Enter your registered phone number 
+or email address
 				</Text>
 				</View>
 			</View>
@@ -45,16 +68,19 @@ export default function ResetPassword (){
 				<View style = {stylesheet._Rectangle_2_2}>
 				</View>
 				<View style = {[stylesheet._next, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
+          <TouchableOpacity  onPress={forgotPassword}
+                    style = {stylesheet.__Button}>
 				<Text style = {[stylesheet._next, {position: "relative", left: -8, top: -10, height: "auto"}]}>
-					Next
+					Reset Now
 				</Text>
+          </TouchableOpacity>
 				</View>
 			</View>
 		</View>
 		</ScrollView>
 	)
 }
-
+// }
 
 const stylesheet = StyleSheet.create({
 	//_Login_Page(Styling for loginpage)
@@ -298,6 +324,7 @@ const stylesheet = StyleSheet.create({
 	},
 	_Frame: {
 	},
+  
 	//_Rectangle (Styling for rectangle (not really used))
 	_Rectangle: {
 		position: "absolute",
