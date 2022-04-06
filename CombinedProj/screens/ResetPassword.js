@@ -27,9 +27,9 @@ export default function ResetPassword (){
           // ..
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			alert(errorMessage);
         });
       navigation.navigate("Login");
     };
