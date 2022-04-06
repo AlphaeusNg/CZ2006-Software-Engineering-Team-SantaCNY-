@@ -26,7 +26,7 @@ const GuideInfoUI = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('https://healthapp2-388fc-default-rtdb.asia-southeast1.firebasedatabase.app/GuideInfo2.json')
+    fetch('https://healthapp2-388fc-default-rtdb.asia-southeast1.firebasedatabase.app/GuideInfo.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
