@@ -33,7 +33,6 @@ const MainMenu = () => {
 		navigation.replace("Emergency Button");
 	}
 
-
 	return (
 		<ScrollView bounces={false} style = {stylesheet.Main_Menu_Page}>
 		<View style = {stylesheet.Main_Menu_Page}>
@@ -51,35 +50,21 @@ const MainMenu = () => {
                     </View>
                 </View>
             </TouchableNativeFeedback>
-            {/* Second + Third Box - Profile + Guides */}
-			<TouchableNativeFeedback onPress = {ProfileNavigation}>
-				<View style = {stylesheet.Profile_Container}>
-					<View style = {stylesheet.Profile_Box}>
-						<Image style = {stylesheet.Profile_Icon} source = {{uri: Profile_image_URL}}>
+      {/* AED */}
+			<View style = {stylesheet.AED_Container}>
+				<TouchableNativeFeedback onPress={AEDNavigation}>
+					<View style = {stylesheet.AED_Box}>
+						<Image style = {stylesheet.AED_Icon} source = {{uri: AED_image_URL}}>
 						</Image>
-						<View style = {[stylesheet.Profile_Text]}>
-						<Text style = {[stylesheet.Profile_Text]}>
-							Profile
+						<View style = {[stylesheet.AED_Text]}>
+						<Text style = {[stylesheet.AED_Text]}>
+							View Nearby AED
 						</Text>
 						</View>
 					</View>
-			
-			<TouchableNativeFeedback onPress = {GuideNavigation}>
-			
-					<View style = {stylesheet.Guide_Box}>
-						<Image style = {stylesheet.Guide_Icon} source = {{uri: Guide_image_URL}}>
-						</Image>
-						<View style = {[stylesheet.Guide_Text]}>
-						<Text style = {[stylesheet.Guide_Text]}>
-							Guides/Advisories
-						</Text>
-						</View>
-					</View>
-				
-			</TouchableNativeFeedback>
+				</TouchableNativeFeedback>
 			</View>
-			</TouchableNativeFeedback>
-            {/* Emergency Response */}
+			{/* Emergency Response */}
 			<TouchableNativeFeedback onPress={ebuttonNavigation}>
 				<View style = {stylesheet.Emergency_Container}>
 					<View style = {stylesheet.Emergency_Box}>
@@ -93,34 +78,36 @@ const MainMenu = () => {
 					</View>
 				</View>
 			</TouchableNativeFeedback>
-            {/* Bottom Row - Settings + AED */}
-			<View style = {stylesheet.Settings_AED_Container}>
-				<View style = {stylesheet.Settings_Box}>
-                    <Image style = {stylesheet.Settings_Icon} source = {{uri: settings_image_URL}}>
-					</Image>
-					<View style = {[stylesheet.Settings_Text]}>
-					<Text style = {[stylesheet.Settings_Text]}>
-						 Settings
-					</Text>
-					</View>
-				</View>
-				<TouchableNativeFeedback onPress={AEDNavigation}>
-					<View style = {stylesheet.AED_Box}>
-						<Image style = {stylesheet.AED_Icon} source = {{uri: AED_image_URL}}>
+			{/* Second + Third Box - Profile + Guides */}
+			<TouchableNativeFeedback onPress = {ProfileNavigation}>
+				<View style = {stylesheet.Profile_Container}>
+					<View style = {stylesheet.Profile_Box}>
+						<Image style = {stylesheet.Profile_Icon} source = {{uri: Profile_image_URL}}>
 						</Image>
-						<View style = {[stylesheet.AED_Text]}>
-						<Text style = {[stylesheet.AED_Text]}>
-							View Nearby AED
+						<View style = {[stylesheet.Profile_Text]}>
+						<Text style = {[stylesheet.Profile_Text]}>
+							Profile
 						</Text>
 						</View>
 					</View>
-				</TouchableNativeFeedback>
+			<TouchableNativeFeedback onPress = {GuideNavigation}>
+					<View style = {stylesheet.Guide_Box}>
+						<Image style = {stylesheet.Guide_Icon} source = {{uri: Guide_image_URL}}>
+						</Image>
+						<View style = {[stylesheet.Guide_Text]}>
+						<Text style = {[stylesheet.Guide_Text]}>
+							Guidelines
+						</Text>
+						</View>
+					</View>
+				
+			</TouchableNativeFeedback>
 			</View>
+			</TouchableNativeFeedback>
 		</View>
 		</ScrollView>
 	)
 }
-
 
 export default MainMenu
 // Store different const styles for creation of different items
@@ -187,10 +174,10 @@ const stylesheet = StyleSheet.create({
 		height: "auto",
 		minWidth: 0,
 		fontFamily: "SourceSansPro_400Regular",
-		fontWeight: '400',
+		fontWeight: 'bold',
 		textDecorationLine: "none",
 		lineHeight: 40,
-		fontSize: 24,
+		fontSize: 20,
 		color: "rgba(9, 16, 29, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
@@ -244,10 +231,10 @@ const stylesheet = StyleSheet.create({
 		height: "auto",
 		minWidth: 0,
 		fontFamily: "SourceSansPro_400Regular",
-		fontWeight: '400',
+		fontWeight: 'bold',
 		textDecorationLine: "none",
 		lineHeight: 40,
-		fontSize: 24,
+		fontSize: 20,
 		color: "rgba(9, 16, 29, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
@@ -289,18 +276,18 @@ const stylesheet = StyleSheet.create({
 		height: "auto",
 		minWidth: 0,
 		fontFamily: "SourceSansPro_400Regular",
-		fontWeight: '400',
+		fontWeight: 'bold',
 		textDecorationLine: "none",
 		lineHeight: 40,
-		fontSize: 15,
+		fontSize: 20,
 		color: "rgba(9, 16, 29, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
 		flexShrink: 0,
         marginTop: 36
 	},
-	//Settings_AED_Container(Container for settings/AED)
-	Settings_AED_Container: {
+	//AED_Container(Container for AED)
+	AED_Container: {
 		position: "relative",
 		width: 315,
 		height: 120,
@@ -309,50 +296,6 @@ const stylesheet = StyleSheet.create({
         marginLeft: 36,
 		display: "flex",
 		flexDirection: "row"
-	},
-	//Settings_Box(For box creating for Setting)
-	Settings_Box: {
-		position: "relative",
-		width: "auto",
-		height: "100%",
-		borderRadius: 20,
-		minWidth: 0,
-		flexBasis: 0,
-		flexGrow: 1,
-		borderWidth: 1,
-		borderStyle: "solid",
-		backgroundColor: "rgba(255, 255, 255, 1)",
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: 'flex-start',
-		flexShrink: 0,
-        marginRight:12
-	},
-	//Settings_Icon style ( Styling for Settings Icon)
-    Settings_Icon: {
-		position: "absolute",
-		width: 59,
-		height: 59,
-		minWidth: 0,
-        marginTop : 12,
-	},
-	//Settings_Text(Text output for settings)
-	Settings_Text: {
-		position: "absolute",
-		width: "100%",
-		height: "auto",
-		minWidth: 0,
-		fontFamily: "SourceSansPro_400Regular",
-		fontWeight: '400',
-		textDecorationLine: "none",
-		lineHeight: 40,
-		fontSize: 24,
-		color: "rgba(9, 16, 29, 1)",
-		textAlign: "center",
-		letterSpacing: 0.1,
-		flexShrink: 0,
-        marginTop: 36
 	},
 	//AED_Box style (For box created for AED)
 	AED_Box: {
@@ -389,10 +332,10 @@ const stylesheet = StyleSheet.create({
 		height: "auto",
 		minWidth: 0,
 		fontFamily: "SourceSansPro_400Regular",
-		fontWeight: '400',
+		fontWeight: 'bold',
 		textDecorationLine: "none",
 		lineHeight: 40,
-		fontSize: 16,
+		fontSize: 20,
 		color: "rgba(9, 16, 29, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
@@ -419,8 +362,9 @@ const stylesheet = StyleSheet.create({
 		minWidth: 0,
 		flexBasis: 0,
 		flexGrow: 1,
-		borderWidth: 1,
+		borderWidth: 2,
 		borderStyle: "solid",
+		borderColor: "rgba(245, 73, 73, 1)",
 		backgroundColor: "rgba(245, 73, 73, 1)",
 		display: "flex",
 		flexDirection: "row",
@@ -447,20 +391,20 @@ const stylesheet = StyleSheet.create({
 		fontFamily: "SourceSansPro_400Regular",
 		fontWeight: "bold",
 		textDecorationLine: "none",
-		lineHeight: 40,
-		fontSize: 20,
-		color: "rgba(9, 16, 29, 1)",
+		lineHeight: 80,
+		fontSize: 24,
+		color: "rgba(255, 255, 255, 1)",
 		textAlign: "center",
 		letterSpacing: 0.1,
 		flexShrink: 0,
-        marginTop: 48
+        marginTop: 36
 	}
 });
 //Images used for button Icons
 
 const medicalinfo_image_URL = "https://compai.pub/v1/png/b16094a5989eab98e2fb6144ba240048a5d4879d118230cc0395932ce74ddefb"
 const AED_image_URL = "https://sizze-figma-plugin-images-upload.s3.us-east-2.amazonaws.com/b3d4123a4ed9c5cb7937bc2ed489e313"
-const settings_image_URL = "https://compai.pub/v1/png/1ec8114eade776e7d63311d011c0bd78579a3872a6b868731617766897fa4d4e"
+//const settings_image_URL = "https://compai.pub/v1/png/1ec8114eade776e7d63311d011c0bd78579a3872a6b868731617766897fa4d4e"
 const Profile_image_URL = "https://compai.pub/v1/png/867b5aad1558972f0049a12e73d10b693bdf3ee4998d94b53d0f242bd5575a76"
 const Guide_image_URL = "https://compai.pub/v1/png/a2c35861889d711874bbb3afc51039aa4b3f2fabff2e4e685ab5d6ca2976616c"
 const Emergency_image_URL = "https://compai.pub/v1/png/5120c18b5b44123e4c345b26129fcf7ad39b3ce24a423ef2347e650feedb878e"

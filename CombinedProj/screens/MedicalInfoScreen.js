@@ -20,7 +20,7 @@ const SCREEN_WIDTH = Dimensions.get('screen').width - 30;
 const BORDER_BOTTOM_WIDTH_CONST = 1;
 
 // Constant value for first text location, subsequent texts are positioned according to this cornerstone text
-const FIRSTTEXT_CONST = 180;
+const FIRSTTEXT_CONST = 80;
 
 // Constant different values for easy change of all input boxes
 const DIFFERENCE_CONST = 40;
@@ -179,8 +179,6 @@ export default function MedicalInfoUI() {
         value={otherHealthCondition}
         placeholder="Other Health Conditions"
       />
-      {/* // Text style to display Medical Info title text */}
-      <Text style={styles.titleText}>Medical Info</Text>
       {/* // Text style to display Blood Type sub text */}
       <Text style={styles.bloodTypeSubText}>Blood Type</Text>
       {/* // Text style to display Allergy text */}
@@ -221,56 +219,62 @@ const styles = StyleSheet.create({
   },
 
   // titleText style (Text output for MedicalInfo)
-  titleText: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    fontStyle: 'italic',
-    color: 'darkblue',
-    position: 'absolute',
-    top: FIRSTTEXT_CONST - 120,
-  },
+  // titleText: {
+  //   fontSize: 35,
+  //   fontWeight: 'bold',
+  //   color: 'darkblue',
+  //   position: 'absolute',
+  //   top: FIRSTTEXT_CONST-120,
+  // },
 
   // bloodTypeSubText style (Text output for Blood Type)
   bloodTypeSubText: {
-    fontSize: 23,
-    fontWeight: 'normal',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST,
+    top: FIRSTTEXT_CONST - 25
   },
 
   // inputBloodType style (Text input for blood type)
   inputBloodType: {
     backgroundColor: COLOR_CONST,
+    width: SCREEN_WIDTH/1.8,
+    fontSize: 15,
     paddingHorizontal: 10,
     paddingVertical: 7,
-    borderRadius: 20,
+    color: 'black',
+    borderRadius: 5,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST - 10,
+    top: FIRSTTEXT_CONST - 40,
     right: 15,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
   // allergySubText style (Text output for allergies)
   allergySubText: {
-    fontSize: 23,
-    fontWeight: 'normal',
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20,
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*1.5,
+    top: FIRSTTEXT_CONST -25 + DIFFERENCE_CONST*1.4,
   },
 
   // inputAllergies style (Text input for allergies)
   inputAllergies: {
     backgroundColor: COLOR_CONST,
-    width: SCREEN_WIDTH/1.5,
+    color: 'black',
+    fontSize: 15,
+    width: SCREEN_WIDTH/1.8,
     paddingHorizontal: 25,
     paddingVertical: 7,
-    borderRadius: 20,
+    borderRadius: 5,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*1.3,
+    top: FIRSTTEXT_CONST -30 + DIFFERENCE_CONST*1.2,
     right: 15,
     flex: 1,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
@@ -278,78 +282,88 @@ const styles = StyleSheet.create({
 
   // drugAllergySubText style (Text output for drug allergies)
   drugAllergySubText: {
-    fontSize: 23,
-    fontWeight: 'normal',
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20,
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*3,
+    top: FIRSTTEXT_CONST - 25 + DIFFERENCE_CONST*2.8,
   },
 
   // inputDrugAllergies (Text input for drug allergies)
   inputDrugAllergies: {
     backgroundColor: COLOR_CONST,
+    color: 'black',
+    fontSize: 15,
     width: SCREEN_WIDTH/1.8,
     paddingHorizontal: 25,
     paddingVertical: 7,
-    borderRadius: 20,
+    borderRadius: 5,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 2.7,
+    top: FIRSTTEXT_CONST -25 + DIFFERENCE_CONST * 2.4,
     right: 15,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
   // heartConditionSubText (Text output for Heart Condition)
   heartConditionSubText: {
-    fontSize: 22,
-    fontWeight: 'normal',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 4.5,
+    top: FIRSTTEXT_CONST - 25 + DIFFERENCE_CONST * 4.2,
   },
 
   // inputHeartCondition (Text input for Heart Condition)
   inputHeartCondition: {
     backgroundColor: COLOR_CONST,
     paddingHorizontal: 25,
+    color: "black",
+    fontSize: 15,
     paddingVertical: 7,
-    borderRadius: 20,
+    borderRadius: 5,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 4.5 - 12,
+    top: FIRSTTEXT_CONST - 25 + DIFFERENCE_CONST * 3.8,
     right: 20,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
   // heartConditionDetails (Text output for Heart Condition Details)
   heartConditionDetails: {
-    fontSize: 23,
-    fontWeight: 'normal',
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST*7,
+    top: FIRSTTEXT_CONST - 25 + DIFFERENCE_CONST*7,
   },
   // inputHeartConditionDetails (Text input for Heart Condition)
   inputHeartConditionDetails: {
     backgroundColor: COLOR_CONST,
-    width: SCREEN_WIDTH,
-    paddingHorizontal: 25,
-    paddingVertical: 7,
-    borderRadius: 20,
+    width: SCREEN_WIDTH-15,
+    color: "black",
+    fontSize: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 5,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 7.7,
-    right: 15,
+    top: FIRSTTEXT_CONST - 25+ DIFFERENCE_CONST * 7.7,
+    right: 20,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
   // asthmaSubText (Text output for Asthma)
   asthmaSubText: {
-    fontSize: 23,
-    fontWeight: 'normal',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "black",
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST *5.8,
+    top: FIRSTTEXT_CONST - 25 + DIFFERENCE_CONST *5.6,
   },
 
   // inputAsthma (Text input for Asthma)
@@ -357,35 +371,39 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR_CONST,
     paddingHorizontal: 25,
     paddingVertical: 7,
-    borderRadius: 20,
+    borderRadius: 5,
+    color: "black",
+    fontSize: 15,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 5.8 - 10,
+    top: FIRSTTEXT_CONST - 25 + DIFFERENCE_CONST * 5.2,
     right: 20,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
   // otherHealthConditionSubText (Text output for other Health Condition)
   otherHealthConditionSubText: {
-    fontSize: 23,
-    fontWeight: 'normal',
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
     position: 'absolute',
     left: 25,
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST *9.2,
+    top: FIRSTTEXT_CONST - 25+ DIFFERENCE_CONST *10.4,
   },
 
   // otherHealthCondition (Text output for Other Health Condition)
   otherHealthCondition: {
     backgroundColor: COLOR_CONST,
-    color: 'grey',
-    width: SCREEN_WIDTH,
-    paddingHorizontal: 10,
-    paddingVertical: 25,
-    borderRadius: 20,
+    width: SCREEN_WIDTH-15,
+    color: "black",
+    fontSize: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 5,
     marginTop: 5,
     position: 'absolute',
-    top: FIRSTTEXT_CONST + DIFFERENCE_CONST * 9.8,
-    right: 15,
+    top: FIRSTTEXT_CONST - 25+ DIFFERENCE_CONST * 11.2,
+    right: 20,
     borderBottomWidth: BORDER_BOTTOM_WIDTH_CONST,
   },
 
@@ -394,6 +412,6 @@ const styles = StyleSheet.create({
     width: '20%',
     position: 'absolute',
     bottom: 30,
-    left: 260,
+    left: 280,
   },
 });

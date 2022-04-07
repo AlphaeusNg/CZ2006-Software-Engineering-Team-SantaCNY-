@@ -44,7 +44,7 @@ export default function ResetPassword (){
 			<View style = {stylesheet._Component}>
 				<View style = {[stylesheet._Enter_your_registered_phone_number_or_email_address, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
 				<Text style = {[stylesheet._Enter_your_registered_phone_number_or_email_address, {position: "relative", flexGrow: 1, left: 0, top: 0, height: "auto", transform: [{translateX: 0}, {translateY: 0}],}]}>
-					Enter your registered phone number or email address
+					Enter your registered email address
 				</Text>
 				</View>
 			</View>
@@ -53,7 +53,7 @@ export default function ResetPassword (){
 				</View>
 				<View style = {[stylesheet._Phone_Number, {display: "flex", flexDirection: "row", alignItems: "center"}]}>
                 <TextInput
-                    placeholder = "Phone/Email"
+                    placeholder = "Email"
                     value = {Email}
                     onChangeText = {text => setEmail(text)}
                     style = {stylesheet._Phone_Number}
@@ -90,7 +90,6 @@ const stylesheet = StyleSheet.create({
 			{translateY: 0},
 			{rotate: "0deg"},
 		],
-		backgroundColor: "rgba(255, 255, 255, 1)",
 		left: 0,
 		top: 0,
 	},
@@ -116,12 +115,12 @@ const stylesheet = StyleSheet.create({
 		position: "absolute",
 		width: "80%",
 		height: "150%",
-		left: 0,
+		left: 5,
 		right: "auto",
 		fontFamily: "Comfortaa",
 		fontWeight: 'bold',
 		textDecorationLine: "none",
-		fontSize: 36,
+		fontSize: 34,
 		color: "rgba(0, 0, 0, 1)",
 		textAlign: "left",
 		textAlignVertical: "center",
@@ -149,9 +148,9 @@ const stylesheet = StyleSheet.create({
 		position: "absolute",
 		width: "auto",
 		height: "auto",
-		left: 5,
+		left: 8,
 		right: "auto",
-		top: "50%",
+		top: "90%",
 		transform: [
 			{translateX: 0},
 			{translateY: -21},
@@ -170,11 +169,11 @@ const stylesheet = StyleSheet.create({
 	_Component_2: {
 		position: "absolute",
 		width: "auto",
-		height: 52,
+		height: 48,
 		borderRadius: 0,
-		left: 16,
+		left: 25,
 		right: 30,
-		top: 244,
+		top: 250,
 		bottom: "auto",
 		transform: [
 			{translateX: 0},
@@ -186,8 +185,8 @@ const stylesheet = StyleSheet.create({
 	//_Rectangle_2 style (Box for phone/email output)
 	_Rectangle_2: {
 		position: "absolute",
-		width: 328,
-		height: 52,
+		width: 335,
+		height: 58,
 		borderRadius: 0,
 		opacity: 1,
 		borderWidth: 2,
@@ -206,8 +205,8 @@ const stylesheet = StyleSheet.create({
 		position: "absolute",
 		width: "auto",
 		height: "auto",
-		left: 17,
-		right: "auto",
+		left: 8,
+		right: 10,
 		top: "50%",
 		transform: [
 			{translateX: 0},
@@ -217,7 +216,7 @@ const stylesheet = StyleSheet.create({
 		fontFamily: "Roboto",
 		fontWeight: 'normal',
 		textDecorationLine: "none",
-		fontSize: 15,
+		fontSize: 18,
 		color: "rgba(0, 0, 0, 0.5)",
 		textAlign: "left",
 		textAlignVertical: "center",
@@ -229,9 +228,9 @@ const stylesheet = StyleSheet.create({
 		width: "auto",
 		height: 52,
 		borderRadius: 0,
-		left: 15,
-		right: 17,
-		top: 312,
+		left: 27,
+		right: 60,
+		top: 380,
 		bottom: "auto",
 		transform: [
 			{translateX: 0},
@@ -243,37 +242,35 @@ const stylesheet = StyleSheet.create({
 	//_Rectangle_2_2 style (Styling for next button)
 	_Rectangle_2_2: {
 		position: "absolute",
-		width: 328,
-		height: 52,
-		borderRadius: 6,
+		width: 280,
+		height: 55,
+		borderRadius: 10,
 		opacity: 1,
-		borderWidth: 2,
-		borderColor: "rgba(0, 0, 0, 1)",
-		left: 0,
+		left: 25,
 		right: "auto",
 		transform: [
 			{translateX: 0},
 			{translateY: 0},
 			{rotate: "0deg"},
 		],
-		backgroundColor: "rgba(0, 0, 0, 1)",
+		backgroundColor: "grey",
 	},
 	//_next style (Text Output for next button)
 	_next: {
 		position: "absolute",
 		width: "auto",
 		height: "auto",
-		left: "50%",
-		top: "50%",
+		left: "57%",
+		top: "74%",
 		transform: [
 			{translateX: -18.71258544921875},
 			{translateY: -7},
 			{rotate: "0deg"},
 		],
 		fontFamily: "Roboto",
-		fontWeight: 'normal',
+		fontWeight: 'bold',
 		textDecorationLine: "none",
-		fontSize: 32,
+		fontSize: 18,
 		color: "white",
 		textAlign: "center",
 		textAlignVertical: "center",

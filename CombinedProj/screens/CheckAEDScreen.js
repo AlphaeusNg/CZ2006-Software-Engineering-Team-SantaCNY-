@@ -13,7 +13,7 @@ import {
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE_DELTA = 0.01;
+const LATITUDE_DELTA = 0.005;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const data = require('../data/aed-locations-geojson.json');
@@ -54,7 +54,8 @@ function generateMarkers() {
   }
   return result;
 }
-markers = generateMarkers();
+// markers = generateMarkers();
+markers = require('../data/NTUmarkers.json');
 
 
 export default function CheckAEDScreen(){

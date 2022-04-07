@@ -115,6 +115,8 @@ const ProfileScreen = () => {
         value={emerContactNum3}
       />
       <TextInput
+        multiline
+        numberOfLines={4}
         style={styles.emerHelpMsg}
         textAlign="left"
         onChangeText={text => setEmerHelpMsg(text)}
@@ -122,154 +124,173 @@ const ProfileScreen = () => {
         placeholder="The owner of this number is in an emergency and needs your help!!"
       />
 
-      <Text style={styles.emailTitle}>Email</Text>
-      <Text style={styles.emailText}>{auth().currentUser?.email}</Text>
-      <Text style={styles.emerContactNum1SubText}>Emergency Contact NO.1</Text>
-      <Text style={styles.emerContactNum2SubText}>Emergency Contact NO.2</Text>
-      <Text style={styles.emerContactNum3SubText}>Emergency Contact NO.3</Text>
-      <Text style={styles.emerHelpMsgSubText}>Emergency Help Message</Text>
+      <Text style={styles.emailTitle}>Email</Text> 
+      <Text style={styles.emailText}>{auth().currentUser?.email}</Text> 
+      <Text style={styles.emerContactNum1SubText}>No.1</Text> 
+      <Text style={styles.emerContactNum2SubText}>No.2</Text> 
+      <Text style={styles.emerContactNum3SubText}>No.3</Text> 
+      <Text style={styles.emerHelpMsgSubText}>Emergency Help Message</Text> 
+      <Text style={styles.emerConList}>Emergency Contact List </Text> 
+      <TouchableOpacity onPress={saveButtonHandler} style={styles.saveButtonContainer}> 
+        <Text style={styles.saveButtonText}>Save</Text> 
+       </TouchableOpacity> 
+      <TouchableOpacity onPress={signOutHandler}  style={styles.signOutButton}> 
+        <Text style={styles.signOutButtonText}>Sign out</Text> 
+      </TouchableOpacity> 
+    </KeyboardAvoidingView> 
+  ); 
+}; 
+ 
+export default ProfileScreen; 
+ 
+// Store different const styles for creation of different items 
+const styles = StyleSheet.create({ 
+  // General container for whole screen 
+  container: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+  }, 
+  saveButtonContainer:{ 
+ position: 'absolute', 
+    bottom: 180, 
+ right: 20,  
+    backgroundColor: 'grey', 
+    width: '15%', 
+ height : '6%', 
+    padding: 12, 
+    borderRadius: 10, 
+    alignItems: 'center', 
+    marginTop: 40,}, 
+   
+   
+  saveButtonText:{ 
 
-      <View style={styles.saveButtonContainer}>
-        <Button title="Save" onPress={saveButtonHandler} />
-      </View>
-      <TouchableOpacity onPress={signOutHandler} style={styles.signOutButton}>
-        <Text style={styles.signOutButtonText}>Sign out</Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
-  );
-};
-
-export default ProfileScreen;
-
-// Store different const styles for creation of different items
-const styles = StyleSheet.create({
-  // General container for whole screen
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  emailTitle: {
-    fontSize: 13,
-    fontWeight: 'normal',
-    position: 'absolute',
-    left: 25,
-    top: 65,
-  },
-
-  emailText: {
-    fontSize: 13,
-    fontWeight: 'normal',
-    position: 'absolute',
-    right: 25,
-    top: 65,
-  },
-
-  emerContactNum1SubText: {
-    fontSize: 13,
-    fontWeight: 'normal',
-    position: 'absolute',
-    left: 25,
-    top: 105,
-  },
-
-  inputEmerContactNum1: {
-    backgroundColor: COLOR_CONST,
-    width: SCREEN_WIDTH / 2,
-    paddingHorizontal: 25,
-    paddingVertical: 5,
-    borderRadius: 20,
-    marginTop: 5,
-    position: 'absolute',
-    top: 90,
-    right: 15,
-    flex: 1,
-  },
-  emerContactNum2SubText: {
-    fontSize: 13,
-    fontWeight: 'normal',
-    position: 'absolute',
-    left: 25,
-    top: 145,
-  },
-
-  inputEmerContactNum2: {
-    backgroundColor: COLOR_CONST,
-    width: SCREEN_WIDTH / 2,
-    paddingHorizontal: 25,
-    paddingVertical: 5,
-    borderRadius: 20,
-    marginTop: 5,
-    position: 'absolute',
-    top: 130,
-    right: 15,
-    flex: 1,
-  },
-
-  emerContactNum3SubText: {
-    fontSize: 13,
-    fontWeight: 'normal',
-    position: 'absolute',
-    left: 25,
-    top: 185,
-  },
-
-  inputEmerContactNum3: {
-    backgroundColor: COLOR_CONST,
-    width: SCREEN_WIDTH / 2,
-    paddingHorizontal: 25,
-    paddingVertical: 5,
-    borderRadius: 20,
-    marginTop: 5,
-    position: 'absolute',
-    top: 170,
-    right: 15,
-    flex: 1,
-  },
-
-  emerHelpMsgSubText: {
-    fontSize: 20,
-    fontWeight: 'normal',
-    position: 'absolute',
-    left: 25,
-    top: 250,
-  },
-
-  emerHelpMsg: {
-    backgroundColor: COLOR_CONST,
-    color: 'grey',
-    width: SCREEN_WIDTH,
-    paddingHorizontal: 10,
-    paddingVertical: 50,
-    borderRadius: 20,
-    marginTop: 5,
-    position: 'absolute',
-    top: 280,
-    right: 15,
-  },
-
-  saveButtonContainer: {
-    width: '20%',
-    position: 'absolute',
-    top: 15,
-    left: 260,
-  },
-
-  signOutButton: {
-    position: 'absolute',
-    bottom: 100,
-    backgroundColor: 'grey',
-    width: '60%',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 40,
-  },
-
-  signOutButtonText: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
-  },
+    color: 'white', 
+  fontWeight: '700', 
+  fontSize: 14,}, 
+ 
+  emailTitle: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    position: 'absolute', 
+    left: 25, 
+    top: 45, 
+  }, 
+ 
+  emailText: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    position: 'absolute', 
+    right: 25, 
+    top: 45, 
+  }, 
+  emerConList:{ 
+   fontSize:20, 
+   fontWeight: 'bold', 
+   position:'absolute', 
+   top:90, 
+   left: 25 
+  }, 
+  emerContactNum1SubText: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    position: 'absolute', 
+    left: 25, 
+    top: 140, 
+  }, 
+ 
+  inputEmerContactNum1: { 
+    backgroundColor: COLOR_CONST, 
+    width: SCREEN_WIDTH / 2, 
+    paddingHorizontal: 25, 
+    paddingVertical: 5, 
+    borderRadius: 5, 
+    marginTop: 5, 
+    position: 'absolute', 
+    top: 130, 
+    left: 75, 
+    flex: 1, 
+  }, 
+  emerContactNum2SubText: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    position: 'absolute', 
+    left: 25, 
+    top: 180, 
+  }, 
+ 
+  inputEmerContactNum2: { 
+    backgroundColor: COLOR_CONST, 
+    width: SCREEN_WIDTH / 2, 
+    paddingHorizontal: 25, 
+    paddingVertical: 5, 
+    borderRadius: 5, 
+    marginTop: 5, 
+    position: 'absolute', 
+    top: 170, 
+    left: 75, 
+    flex: 1, 
+  }, 
+ 
+  emerContactNum3SubText: { 
+    fontSize: 18, 
+    fontWeight: 'bold', 
+    position: 'absolute', 
+    left: 25, 
+    top: 220, 
+  }, 
+ 
+  inputEmerContactNum3: { 
+    backgroundColor: COLOR_CONST, 
+    width: SCREEN_WIDTH / 2, 
+    paddingHorizontal: 25, 
+    paddingVertical: 5, 
+    borderRadius: 5, 
+    marginTop: 5, 
+    position: 'absolute', 
+    top: 210, 
+    left: 75, 
+    flex: 1, 
+  }, 
+ 
+  emerHelpMsgSubText: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    position: 'absolute', 
+    left: 25, 
+    top: 260, 
+  }, 
+ 
+  emerHelpMsg: { 
+    backgroundColor: COLOR_CONST, 
+    fontSize:20,
+    color: 'grey', 
+    width: SCREEN_WIDTH-5,
+    paddingHorizontal: 10, 
+    paddingVertical: 50, 
+    borderRadius: 5, 
+    marginTop: 5, 
+    position: 'absolute', 
+    top: 290, 
+    right: 15, 
+  }, 
+ 
+ 
+  signOutButton: { 
+    position: 'absolute', 
+    bottom: 60, 
+    backgroundColor: 'grey', 
+    width: '60%', 
+    padding: 15, 
+    borderRadius: 10, 
+    alignItems: 'center', 
+    marginTop: 40, 
+  }, 
+ 
+  signOutButtonText: { 
+    color: 'white', 
+    fontWeight: '700', 
+    fontSize: 16, 
+  }, 
 });

@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
   TextInput,
+  Alert,
 } from 'react-native';
 
 /**
@@ -26,7 +27,7 @@ const GuideInfoUI = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('')      // fill in firebase database json url
+    fetch('https://healthapp2-388fc-default-rtdb.asia-southeast1.firebasedatabase.app/GuideInfo.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -55,8 +56,8 @@ const GuideInfoUI = () => {
       const newData = masterDataSource.filter(function (item) {
 
         // Applying filter for the inserted text in search bar
-        const itemData = item.type
-          ? item.type.toUpperCase()
+        const itemData = item.title
+          ? item.title.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -83,7 +84,7 @@ const GuideInfoUI = () => {
     return (
       // Flat List Item
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.type}
+        {item.title}
       </Text>
     );
   };
@@ -103,7 +104,10 @@ const GuideInfoUI = () => {
 
   const getItem = (item) => {
     // Function for click on an item
-    alert(item.type + ': ' + item.instruction);
+    Alert.alert(
+      item.title + " Guide",
+      item.instruction,
+    );
   };
 
   
@@ -135,10 +139,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   itemStyle: {
-    padding: 10,
+    padding: 15,
+    fontSize: 15
   },
   textInputStyle: {
-    height: 40,
+    height: 60,
+    fontSize: 20,
     borderWidth: 1,
     paddingLeft: 20,
     margin: 5,
