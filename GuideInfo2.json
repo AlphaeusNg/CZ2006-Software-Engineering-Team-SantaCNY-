@@ -1,0 +1,17 @@
+[
+  {
+    "title": "AED Guide",
+    "img": "./GuideInfoImgs/AEDguideImg",
+    "url": "https://www.scdf.gov.sg/savealife/about"
+  },
+  {
+    "title": "Choking Guide",
+    "img": "./GuideInfoImgs/ChokingGuideImg",
+    "url": "https://www.walmart.com/ip/Choking-First-Aid-Chart-Poster-Print-by-Gwen-ShockeyScience-Source/962460346"
+  },
+  {
+    "title": "CPR Guide",
+    "img": "./GuideInfoImgs/CPRguideImg",
+    "url": "http://www.niosh.com.my/publication/poster/item/32-cpr-cordiopulmonary-resuscitation"
+  }
+]

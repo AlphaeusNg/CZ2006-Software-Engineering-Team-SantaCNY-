@@ -26,7 +26,7 @@ const GuideInfoUI = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('')
+    fetch('https://healthapp2-388fc-default-rtdb.asia-southeast1.firebasedatabase.app/GuideInfo.json')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -55,8 +55,8 @@ const GuideInfoUI = () => {
       const newData = masterDataSource.filter(function (item) {
 
         // Applying filter for the inserted text in search bar
-        const itemData = item.title
-          ? item.title.toUpperCase()
+        const itemData = item.type
+          ? item.type.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -83,9 +83,7 @@ const GuideInfoUI = () => {
     return (
       // Flat List Item
       <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.id}
-        {'.'}
-        {item.title.toUpperCase()}
+        {item.type}
       </Text>
     );
   };
@@ -105,13 +103,35 @@ const GuideInfoUI = () => {
 
   const getItem = (item) => {
     // Function for click on an item
-    alert('Id : ' + item.id + ' Title : ' + item.title);
+    return (
+      <View>
+        <TouchableOpacity style={styles.backButton}>
+        
+        <Image
+          source={require('./assets/backButtonIcon.png')}
+          onPress={() => back}
+        />
+        </TouchableOpacity>
+        <TouchableOpacity style = {styles.imgContainer}>
+          <Image
+            source = {require(item.img)}
+            onPress = {() => Linking.openURL(item.url)}
+          />
+        </TouchableOpacity>
+      </View>
+    )
   };
 
   
   return (
     
       <View style = {styles.container}>
+        <TouchableOpacity style={styles.backButton}>
+        <Image
+          source={require('./assets/backButtonIcon.png')}
+          onPress={() => back}
+        />
+        </TouchableOpacity>
         <TextInput
           style = {styles.textInputStyle}
           onChangeText={(text) => searchFilterFunction(text)}
@@ -147,6 +167,17 @@ const styles = StyleSheet.create({
     borderColor: '#009688',
     backgroundColor: '#FFFFFF',
   },
+  backButton: {
+    flex: 1,
+    resizeMode: 'contain',
+    top: -50,
+    left: 10,
+    position: 'absolute',
+  },
+  imgContainer: {
+    alignItems: 'center',   
+    justifyContent: 'center',
+},
 });
 
 export default GuideInfoUI;
