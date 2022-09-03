@@ -18,6 +18,7 @@ import GuideInfoUI from './screens/GuideInfoScreen';
 import EmergencyButtonScreen from './screens/EmergencyButtonScreen';
 import CheckAEDScreen from './screens/CheckAEDScreen';
 //No mercy
+//bybye
 //Function App that returns Nagivator Function
 const Stack = createNativeStackNavigator();
 const App = () => {
