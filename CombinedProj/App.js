@@ -17,7 +17,7 @@ import MedicalInfoUI from './screens/MedicalInfoScreen';
 import GuideInfoUI from './screens/GuideInfoScreen';
 import EmergencyButtonScreen from './screens/EmergencyButtonScreen';
 import CheckAEDScreen from './screens/CheckAEDScreen';
-
+//No mercy
 //Function App that returns Nagivator Function
 const Stack = createNativeStackNavigator();
 const App = () => {
